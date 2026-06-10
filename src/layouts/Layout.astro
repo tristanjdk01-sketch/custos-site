@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Sovereign AI architecture for SA regulated industries. POPIA-compliant deployments for medical aid, banking, and insurance.',
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- OG / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- RSS feed -->
+    <link rel="alternate" type="application/rss+xml" title="Custos" href="/rss.xml" />
+  </head>
+  <body style="background: var(--bg);">
+    <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(10,10,10,0.85);">
+      <div style="max-width: 760px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px;">
+        <a href="/" style="color: #fff; font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">&gt;</span>
+          Custos
+        </a>
+        <nav style="display: flex; gap: 1.5rem; align-items: center;">
+          <a href="/writing" style="font-size: 0.875rem; color: var(--text-muted); transition: color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">Writing</a>
+          <a href="/about" style="font-size: 0.875rem; color: var(--text-muted); transition: color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">About</a>
+          <a href="https://www.linkedin.com/in/tristandekock" target="_blank" rel="noopener" style="font-size: 0.875rem; color: var(--accent); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 4px; transition: border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">LinkedIn</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer style="border-top: 1px solid var(--border); margin-top: 6rem; padding: 2rem 1.5rem;">
+      <div style="max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">
+          <span style="color: var(--accent); font-family: monospace;">Custos</span> — Sovereign AI architecture for SA regulated industries.
+        </p>
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-subtle);">
+          Cape Town, South Africa
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

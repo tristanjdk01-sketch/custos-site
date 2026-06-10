@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout
+  title="Writing — Custos"
+  description="Technical writing on sovereign AI architecture, POPIA compliance, and production LLM deployment in SA regulated industries."
+>
+  <div style="max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem;">
+
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 1.5rem;">Writing</p>
+    <h1 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; color: #fff; margin: 0 0 0.75rem;">Architecture, POPIA, and sovereign AI in SA.</h1>
+    <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0 0 3rem; line-height: 1.65;">
+      Technical posts on building production AI systems for regulated industries. Reference architectures, compliance deep-dives, and build-in-public notes from real deployments.
+    </p>
+
+    {posts.length === 0 ? (
+      <div style="border: 1px solid var(--border); border-radius: 6px; padding: 3rem; text-align: center; background: var(--bg-surface);">
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); margin: 0 0 0.75rem;">Coming soon</p>
+        <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0 0 1rem; max-width: 40ch; margin-left: auto; margin-right: auto; line-height: 1.65;">
+          First entries are in progress. POPIA reading, RAG pipelines over compliance documents, vLLM benchmarks.
+        </p>
+        <p style="font-size: 0.8rem; color: var(--text-subtle); margin: 0;">
+          Subscribe via <a href="/rss.xml" style="color: var(--accent);">RSS</a> or follow on <a href="https://www.linkedin.com/in/tristandekock" target="_blank" rel="noopener" style="color: var(--accent);">LinkedIn</a> for updates.
+        </p>
+      </div>
+    ) : (
+      <div style="display: grid; gap: 0;">
+        {posts.map((post, i) => (
+          <a
+            href={`/writing/${post.id}`}
+            style={`display: block; padding: 1.5rem 0; ${i > 0 ? 'border-top: 1px solid var(--border);' : ''} text-decoration: none;`}
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 0;">
+                <h2 style="font-size: 1.0625rem; font-weight: 600; color: #fff; margin: 0 0 0.4rem; letter-spacing: -0.02em; line-height: 1.4;">{post.data.title}</h2>
+                <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0; line-height: 1.55;">{post.data.description}</p>
+                {post.data.tags && (
+                  <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.75rem;">
+                    {post.data.tags.map((tag: string) => (
+                      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(34,211,238,0.15); border-radius: 3px; padding: 0.15rem 0.4rem;">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <time datetime={post.data.pubDate.toISOString()} style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-subtle); white-space: nowrap; flex-shrink: 0; padding-top: 0.2rem;">
+                {post.data.pubDate.toLocaleDateString('en-ZA', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+
+  </div>
+</Layout>
