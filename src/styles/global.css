@@ -1,18 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  --bg: #0a0a0a;
-  --bg-surface: #111111;
-  --bg-elevated: #1a1a1a;
-  --border: #262626;
-  --text: #e5e5e5;
-  --text-muted: #737373;
-  --text-subtle: #404040;
-  --accent: #22d3ee;
-  --accent-dim: rgba(34, 211, 238, 0.08);
-  --accent-hover: #06b6d4;
+  /* Obsidian base, deep-teal primary, brass accent. Guardian / sovereign. */
+  --bg: #0b0e0d;
+  --bg-surface: #101413;
+  --bg-elevated: #161c1a;
+  --border: #1e2624;
+  --text: #e6ebe9;
+  --text-muted: #8a9893;
+  --text-subtle: #4b5854;
+
+  /* Teal = primary workhorse */
+  --accent: #3a9d8e;
+  --accent-bright: #5fc7b5;
+  --accent-dim: rgba(58, 157, 142, 0.09);
+  --accent-hover: #5fc7b5;
+
+  /* Brass = sparing accent / seal of trust */
+  --brass: #c9a24b;
+  --brass-dim: rgba(201, 162, 75, 0.10);
+  --brass-border: rgba(201, 162, 75, 0.35);
+
+  --serif: 'Fraunces', Georgia, serif;
+
+  --accent-border: rgba(58, 157, 142, 0.30);
+  --accent-border-soft: rgba(58, 157, 142, 0.15);
+}
+
+/* Serif accent line (gravitas) */
+.serif { font-family: var(--serif); font-weight: 600; }
+/* Serif italic emphasis inside a display heading */
+.h-display .serif-em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--accent-bright);
 }
 
 * { box-sizing: border-box; }
@@ -124,7 +149,7 @@ code:not(pre code) {
   padding: 1.75rem;
   transition: border-color 0.18s ease, background 0.18s ease;
 }
-.card:hover { border-color: rgba(34,211,238,0.35); background: #131313; }
+.card:hover { border-color: rgba(58,157,142,0.35); background: #131a18; }
 
 /* Numbered spec block (the 01/02/03 offering rows) */
 .spec-num {
@@ -141,7 +166,7 @@ code:not(pre code) {
   font-size: 0.72rem;
   color: var(--accent);
   background: var(--accent-dim);
-  border: 1px solid rgba(34,211,238,0.15);
+  border: 1px solid var(--accent-border-soft);
   border-radius: 3px;
   padding: 0.18rem 0.5rem;
 }
@@ -174,7 +199,7 @@ code:not(pre code) {
   background: var(--bg-surface);
   color: var(--text);
 }
-.flow-node.boundary { border-color: rgba(34,211,238,0.4); color: var(--accent); }
+.flow-node.boundary { border-color: rgba(58,157,142,0.4); color: var(--accent); }
 .flow-arrow { color: var(--text-subtle); font-family: 'JetBrains Mono', monospace; }
 
 /* Responsive grid utilities (replace inline grid-template-columns) */

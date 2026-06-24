@@ -27,7 +27,7 @@ const { Content } = await post.render();
       {post.data.tags && (
         <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem;">
           {post.data.tags.map((tag: string) => (
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(34,211,238,0.15); border-radius: 3px; padding: 0.15rem 0.4rem;">{tag}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-border-soft); border-radius: 3px; padding: 0.15rem 0.4rem;">{tag}</span>
           ))}
         </div>
       )}
