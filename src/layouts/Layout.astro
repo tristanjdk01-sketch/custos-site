@@ -25,6 +25,51 @@ const nav = [
 
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
+
+// Structured data: tells search engines who Custos is, who Tristan is, and
+// that this is the canonical site. Helps own branded + niche-term searches.
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://custosza.com';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'Custos',
+      url: siteUrl,
+      logo: `${siteUrl}/logo-mark.svg`,
+      description:
+        'Sovereign, POPIA-compliant AI architecture for South African regulated industries: medical aid, banking, and insurance.',
+      areaServed: { '@type': 'Country', name: 'South Africa' },
+      founder: { '@id': `${siteUrl}/#tristan` },
+      sameAs: ['https://www.linkedin.com/in/tristandekock'],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#tristan`,
+      name: 'Tristan de Kock',
+      jobTitle: 'AI Automation Engineer',
+      url: `${siteUrl}/about`,
+      worksFor: { '@id': `${siteUrl}/#organization` },
+      knowsAbout: [
+        'Sovereign AI',
+        'POPIA compliance',
+        'AI data residency',
+        'LLM architecture',
+        'Regulated industry AI',
+      ],
+      sameAs: ['https://www.linkedin.com/in/tristandekock'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Custos',
+      publisher: { '@id': `${siteUrl}/#organization` },
+      inLanguage: 'en-ZA',
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -40,16 +85,23 @@ const isActive = (href: string) =>
     <meta name="description" content={description} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Custos" />
+    <meta property="og:locale" content="en_ZA" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Custos — sovereign AI architecture for SA regulated industries" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
     <link rel="alternate" type="application/rss+xml" title="Custos" href="/rss.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body style="background: var(--bg);">
     <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(11,14,13,0.82);">

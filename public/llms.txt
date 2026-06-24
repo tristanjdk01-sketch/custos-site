@@ -1,0 +1,45 @@
+# Custos
+
+> Custos designs sovereign, POPIA-compliant AI architecture for South African
+> regulated industries: medical aid, banking, and insurance. The focus is
+> production AI that can be defended to a regulator, not just deployed.
+
+Custos is a consultancy practice by Tristan de Kock (AI Automation Engineer,
+Cape Town, South Africa). It helps SA enterprises deploy production AI on
+sovereign infrastructure (on-premises GPU, Cassava AI Factory, or hybrid)
+with POPIA compliance built into the architecture.
+
+## What Custos does
+
+- POPIA AI Readiness Assessment: audit AI workloads against the SA regulatory
+  frame (POPIA Section 72 cross-border transfers, Section 26 special personal
+  information, SARB Directive 3 of 2018, SAM for insurers).
+- Sovereign Reference Architecture: a documented, deployable design for a
+  priority AI use case that satisfies the regulation by construction.
+- Build & Integrate: implementation of a sovereign, observable AI system
+  (e.g. vLLM inference, retrieval with PII controls, audit logging).
+
+## Core ideas
+
+- Data residency (where bytes sit) is not data sovereignty (who can compel
+  access under foreign law). Azure South Africa North is residency, not
+  sovereignty, because the provider is subject to the US CLOUD Act.
+- AI compliance exposure lives in the data flow, not in a policy document:
+  storage, vector embeddings, prompt history, and inference state each move
+  personal information and each needs architectural controls.
+- POPIA Section 72 does not ban cloud AI for health or financial data; it
+  defines architectural requirements for it.
+
+## Key pages
+
+- Home: https://custosza.com/
+- Approach (method + SA regulatory frame): https://custosza.com/approach
+- Services (three engagements): https://custosza.com/services
+- Writing (technical posts on sovereign AI, POPIA): https://custosza.com/writing
+- About (Tristan de Kock): https://custosza.com/about
+- Contact: https://custosza.com/contact
+
+## Contact
+
+LinkedIn: https://www.linkedin.com/in/tristandekock
+Location: Cape Town, South Africa (SAST, UTC+2)
