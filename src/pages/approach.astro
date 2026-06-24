@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const regs = [
+  {
+    code: 'POPIA S72',
+    name: 'Cross-border transfers',
+    body: 'Personal information may only leave SA where the receiving country offers adequate protection, or under a contract that imposes equivalent terms. An LLM inference call to a US-hosted endpoint is a transfer event, not just a network request.',
+  },
+  {
+    code: 'POPIA S26',
+    name: 'Special personal information',
+    body: 'Health, biometric, and certain financial data carry a higher processing bar. This is the default condition for medical aid and life insurance AI, and it changes what counts as an acceptable architecture.',
+  },
+  {
+    code: 'POPIA S19',
+    name: 'Security safeguards',
+    body: 'Reasonable technical and organisational measures are mandatory. For AI workloads that means controls over logging, vector stores, and inference state, not just access control on a database.',
+  },
+  {
+    code: 'SARB Directive 3 of 2018',
+    name: 'Cloud computing',
+    body: 'Banks must assess data sovereignty and concentration risk for cloud deployments. AI inference through a foreign-controlled provider is exactly the case this directive was written to surface.',
+  },
+  {
+    code: 'SAM Pillar 1 & 2',
+    name: 'Insurance model risk',
+    body: 'Solvency Assessment and Management treats AI and model risk under operational risk and governance. The interpretation emerging is that AI needs its own architectural controls, not a footnote in a risk register.',
+  },
+];
+
+const layers = [
+  { label: 'Storage', state: 'mapped', note: 'Where most teams stop.' },
+  { label: 'Vector embeddings', state: 'exposed', note: 'PII survives in the index.' },
+  { label: 'Prompt history', state: 'exposed', note: 'Logged, often offshore.' },
+  { label: 'Inference state', state: 'exposed', note: 'Transient, still a transfer.' },
+];
+---
+
+<Layout
+  title="Approach — Custos"
+  description="How Custos designs sovereign, POPIA-compliant AI: data-flow mapping, the SA regulatory frame (POPIA, SARB Directive 3, SAM), and sovereign deployment patterns."
+>
+  <!-- HERO -->
+  <section class="grid-bg">
+    <div class="wrap" style="padding: 5rem 1.5rem 3.5rem;">
+      <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">Approach</span> &nbsp;//&nbsp; the method</p>
+      <h1 class="h-display" style="max-width: 18ch; font-size: clamp(2rem, 5vw, 3rem);">
+        The exposure lives in the data flow.
+      </h1>
+      <p class="lead" style="margin: 1.75rem 0 0; max-width: 54ch;">
+        AI compliance is usually treated as a policy exercise. The real risk is architectural: it is the set of places personal information moves when a model runs. Custos works at that layer, then maps it to the regulation.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHERE PII FLOWS -->
+  <section class="wrap" style="padding: 3rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ 01 ]</span>
+      <span class="label">Map where personal information moves</span>
+    </div>
+    <div class="grid-2">
+      <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; margin: 0;">
+        A typical AI pilot touches member or customer data in four places. Most architectures account for the first one and quietly leak through the other three. The vector store keeps embeddings of personal information. Prompt history is logged, often to a foreign region. Inference itself generates transient state that still constitutes a transfer under POPIA.
+        <br /><br />
+        The first deliverable on any engagement is a complete map of these flows. You cannot design a sovereign architecture for data you have not located.
+      </p>
+      <div style="border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); padding: 1.5rem;">
+        <p class="label" style="margin: 0 0 1.25rem;">PII flow · typical LLM pilot</p>
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          {layers.map((l) => (
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg);">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text);">{l.label}</span>
+              <span style={`font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: ${l.state === 'mapped' ? 'var(--text-subtle)' : 'var(--accent)'};`}>
+                {l.state === 'mapped' ? 'mapped' : '! exposed'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGULATORY FRAME -->
+  <section class="wrap" style="padding: 3rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ 02 ]</span>
+      <span class="label">The regulatory frame Custos designs against</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 0;">
+      {regs.map((r, i) => (
+        <div class="grid-reg" style={`padding: 1.5rem 0; ${i > 0 ? 'border-top: 1px solid var(--border);' : ''}`}>
+          <div>
+            <span class="chip">{r.code}</span>
+            <p style="margin: 0.75rem 0 0; font-size: 0.95rem; font-weight: 600; color: #fff;">{r.name}</p>
+          </div>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">{r.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- DEPLOYMENT PATTERNS -->
+  <section class="wrap" style="padding: 3rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ 03 ]</span>
+      <span class="label">Three sovereign deployment patterns</span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem;">On-prem GPU</h3>
+        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Inference on owned hardware inside the client network. Maximum control, highest capital cost. Right for the most sensitive workloads.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem;">Sovereign cloud</h3>
+        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Private inference on SA-sovereign infrastructure such as Cassava AI Factory. Local compute at scale without the capital outlay of owning a cluster.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem;">Hybrid retrieval</h3>
+        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Sensitive retrieval stays local; only de-identified context reaches an offshore model. The right pattern depends on data classification and latency.</p>
+      </div>
+    </div>
+    <p style="margin: 2rem 0 0; font-size: 0.9rem; color: var(--text-subtle); line-height: 1.6; max-width: 60ch;">
+      None of these is "default OpenAI." The choice between them is driven by data classification and decision latency, and it is the heart of the architecture work.
+    </p>
+  </section>
+</Layout>

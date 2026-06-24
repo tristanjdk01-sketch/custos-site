@@ -1,113 +1,146 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const verticals = [
+  {
+    num: '01',
+    name: 'Medical Aid',
+    reg: 'POPIA S26 · CMS',
+    line: 'Member health data is special personal information. Every LLM pilot touches it during inference, not just storage.',
+  },
+  {
+    num: '02',
+    name: 'Banking',
+    reg: 'SARB Directive 3 · FIC',
+    line: 'AML and credit-decision AI sits across POPIA, FIC, and SARB cloud rules at once. The architecture has to satisfy all three.',
+  },
+  {
+    num: '03',
+    name: 'Insurance',
+    reg: 'SAM · FSCA · TCF',
+    line: 'Underwriting and claims AI must be explainable to a regulator and fair to a customer. That is an architecture problem before it is a model problem.',
+  },
+];
+
+const steps = [
+  {
+    num: '01',
+    title: 'Map the data flow',
+    body: 'Classify every point personal information moves through an AI workload: storage, embeddings, prompt history, inference state. Most teams have mapped storage and nothing else.',
+  },
+  {
+    num: '02',
+    title: 'Find the regulatory boundary',
+    body: 'Mark where POPIA Section 72, Section 26, SARB Directive 3, or SAM obligations are triggered. This is the line your architecture has to defend.',
+  },
+  {
+    num: '03',
+    title: 'Design the sovereign path',
+    body: 'Choose the deployment that holds: on-prem GPU, Cassava AI Factory, or hybrid retrieval with controlled generation. Documented so legal and the regulator can read it.',
+  },
+];
 ---
 
-<Layout title="Custos — Sovereign AI architecture for SA regulated industries">
-
-  <!-- Hero -->
-  <section style="max-width: 760px; margin: 0 auto; padding: 5rem 1.5rem 4rem;">
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 1.5rem;">Custos</p>
-    <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.04em; color: #ffffff; margin: 0 0 1.5rem; max-width: 22ch;">
-      Sovereign AI architecture for SA regulated industries.
-    </h1>
-    <p style="font-size: 1.125rem; color: var(--text-muted); line-height: 1.7; max-width: 52ch; margin: 0 0 2.5rem;">
-      Helping South African medical aid, banking, and insurance enterprises deploy production AI on sovereign infrastructure. POPIA-compliant by design.
-    </p>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="/writing" style="background: var(--accent); color: #000; font-weight: 600; font-size: 0.875rem; padding: 0.6rem 1.25rem; border-radius: 4px;">
-        Read the writing
-      </a>
-      <a href="/about" style="border: 1px solid var(--border); color: var(--text); font-size: 0.875rem; padding: 0.6rem 1.25rem; border-radius: 4px;">
-        About Custos
-      </a>
-    </div>
-  </section>
-
-  <div style="max-width: 760px; margin: 0 auto; padding: 0 1.5rem;">
-    <hr style="border: none; border-top: 1px solid var(--border);" />
-  </div>
-
-  <!-- What we do -->
-  <section style="max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem;">
-    <h2 style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 2.5rem;">What Custos does</h2>
-    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-
-      <div style="border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg-surface);">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); margin: 0 0 0.75rem;">01</p>
-        <h3 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0 0 0.75rem;">Sovereign AI Readiness Assessment</h3>
-        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin: 0;">
-          A 2 to 3 week engagement. We map your current AI workloads, identify which handle POPIA-sensitive data, and design a sovereign deployment path on Cassava AI Factory, on-prem GPU infrastructure, or hybrid.
-        </p>
+<Layout
+  title="Custos — Sovereign AI architecture for SA regulated industries"
+  description="POPIA-compliant AI architecture for South African medical aid, banking, and insurance. Production AI you can defend to your regulator, not just deploy."
+>
+  <!-- HERO -->
+  <section class="grid-bg">
+    <div class="wrap" style="padding: 6rem 1.5rem 5rem;">
+      <p class="label" style="margin: 0 0 1.75rem;">
+        <span class="label-accent">Sovereign AI</span> &nbsp;//&nbsp; South Africa
+      </p>
+      <h1 class="h-display" style="max-width: 16ch;">
+        Production AI your regulator <span class="accent">can't object to.</span>
+      </h1>
+      <p class="lead" style="margin: 2rem 0 0; max-width: 56ch;">
+        South African medical schemes, banks, and insurers are running AI pilots on infrastructure that routes personal data through foreign jurisdictions. Custos designs the architecture that keeps it sovereign, POPIA-compliant, and defensible.
+      </p>
+      <div style="display: flex; gap: 1rem; margin-top: 2.75rem; flex-wrap: wrap;">
+        <a href="/services" style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #0a0a0a; background: var(--accent); padding: 0.7rem 1.3rem; border-radius: 6px; font-weight: 600;">
+          See the services
+        </a>
+        <a href="/approach" style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text); border: 1px solid var(--border); padding: 0.7rem 1.3rem; border-radius: 6px;">
+          How it works &rarr;
+        </a>
       </div>
 
-      <div style="border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg-surface);">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); margin: 0 0 0.75rem;">02</p>
-        <h3 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0 0 0.75rem;">Architecture Design</h3>
-        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin: 0;">
-          Reference architectures for POPIA-compliant LLM inference, production RAG over regulated corpora, observability stacks, and identity federation for enterprise AI deployments.
-        </p>
-      </div>
-
-      <div style="border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg-surface);">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); margin: 0 0 0.75rem;">03</p>
-        <h3 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0 0 0.75rem;">Production AI Engineering</h3>
-        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin: 0;">
-          Building production LLM pipelines, agentic systems, and prompt-engineering guardrails on the Cassava AI Factory and sovereign infrastructure. Modal, vLLM, Anthropic Claude, Kubernetes.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <div style="max-width: 760px; margin: 0 auto; padding: 0 1.5rem;">
-    <hr style="border: none; border-top: 1px solid var(--border);" />
-  </div>
-
-  <!-- Context -->
-  <section style="max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem;">
-    <h2 style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 2rem;">The context</h2>
-    <div style="display: grid; gap: 1.5rem;">
-      <div style="display: flex; gap: 1rem; align-items: flex-start;">
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); min-width: 2rem; padding-top: 0.15rem; flex-shrink: 0;">01</span>
-        <p style="margin: 0; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7;">
-          <strong style="color: var(--text);">Cassava AI Factory launched in SA in October 2025.</strong> NVIDIA infrastructure, on-shore GPU compute. The first credible sovereign inference option at scale in South Africa.
-        </p>
-      </div>
-      <div style="display: flex; gap: 1rem; align-items: flex-start;">
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); min-width: 2rem; padding-top: 0.15rem; flex-shrink: 0;">02</span>
-        <p style="margin: 0; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7;">
-          <strong style="color: var(--text);">POPIA Section 72 restricts cross-border data transfers.</strong> Most default AI cloud deployments route inference through US or EU data centres. For health data, financial data, and biometrics, this creates real architectural and compliance obligations.
-        </p>
-      </div>
-      <div style="display: flex; gap: 1rem; align-items: flex-start;">
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); min-width: 2rem; padding-top: 0.15rem; flex-shrink: 0;">03</span>
-        <p style="margin: 0; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7;">
-          <strong style="color: var(--text);">Every SA board is asking where their AI data lives.</strong> Most enterprises don't have a clean answer. Global consultancies charge R10m+ minimums. Custos works in the R75k to R500k range, with SA-specific sovereign infrastructure depth.
+      <!-- residency vs sovereignty mini-diagram -->
+      <div style="margin-top: 4.5rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); padding: 1.5rem 1.75rem; max-width: 720px;">
+        <p class="label" style="margin: 0 0 1.25rem;">The distinction most pilots miss</p>
+        <div class="flow-row" style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <div class="flow-node">Member data</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-node">Azure ZA-North</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-node boundary">US-controlled provider</div>
+        </div>
+        <p style="margin: 1.25rem 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+          Data residency keeps the bytes in SA. It does not put them beyond the reach of foreign law. Sovereignty is who can compel access, not where the disk sits.
         </p>
       </div>
     </div>
   </section>
 
-  <div style="max-width: 760px; margin: 0 auto; padding: 0 1.5rem;">
-    <hr style="border: none; border-top: 1px solid var(--border);" />
-  </div>
+  <!-- VERTICALS -->
+  <section class="wrap" style="padding: 4rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ WHO ]</span>
+      <span class="label">Three regulated industries</span>
+    </div>
+    <div class="grid-3">
+      {verticals.map((v) => (
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+            <span class="spec-num">{v.num}</span>
+            <span class="chip">{v.reg}</span>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{v.name}</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{v.line}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="wrap" style="padding: 4rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ HOW ]</span>
+      <span class="label">The method</span>
+    </div>
+    <div class="grid-method">
+      <div>
+        <h2 class="h-section" style="max-width: 14ch;">Compliance is an architecture decision, not a policy document.</h2>
+        <p style="margin: 1.5rem 0 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 42ch;">
+          Most "AI governance" stops at a written policy. The exposure lives in the data flow: where personal information actually moves when a model runs. Custos works at that layer.
+        </p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        {steps.map((s, i) => (
+          <div style={`display: flex; gap: 1.25rem; padding: 1.5rem 0; ${i > 0 ? 'border-top: 1px solid var(--border);' : ''}`}>
+            <span class="spec-num" style="flex-shrink: 0;">{s.num}</span>
+            <div>
+              <h4 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0 0 0.4rem;">{s.title}</h4>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{s.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
-  <section style="max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem;">
-    <div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; text-align: center;">
-      <h2 style="font-size: 1.375rem; font-weight: 600; color: #fff; letter-spacing: -0.025em; margin: 0 0 0.75rem;">Running research interviews</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; max-width: 48ch; margin: 0 auto 2rem;">
-        I'm talking to SA CIOs, CROs, and compliance leads working on AI governance and sovereign infrastructure. 25 minutes. No pitch.
+  <section class="wrap" style="padding: 4rem 1.5rem 0;">
+    <div style="border: 1px solid rgba(34,211,238,0.2); border-radius: 12px; background: linear-gradient(135deg, rgba(34,211,238,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem; text-align: center;">
+      <p class="label label-accent" style="margin: 0 0 1rem;">For CIOs, CROs, and Heads of Data</p>
+      <h2 class="h-section" style="margin: 0 auto; max-width: 24ch;">"Where does our AI data actually live?" If the answer isn't clean, that's the conversation.</h2>
+      <p style="margin: 1.25rem auto 2rem; font-size: 0.95rem; color: var(--text-muted); max-width: 44ch; line-height: 1.65;">
+        25 minutes. No pitch. A working session on your AI workloads and where the regulatory exposure sits.
       </p>
-      <a
-        href="https://www.linkedin.com/in/tristandekock"
-        target="_blank"
-        rel="noopener"
-        style="display: inline-block; background: var(--accent); color: #000; font-weight: 600; font-size: 0.875rem; padding: 0.7rem 1.5rem; border-radius: 4px;"
-      >
-        Connect on LinkedIn
+      <a href="/contact" style="display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #0a0a0a; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600;">
+        Start the conversation
       </a>
     </div>
   </section>
-
 </Layout>

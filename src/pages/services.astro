@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    num: '01',
+    name: 'POPIA AI Readiness Assessment',
+    duration: '2 to 3 weeks',
+    summary: 'A structured audit of your AI workloads against the SA regulatory frame. The fastest way to know where you actually stand.',
+    includes: [
+      'Data-flow map of every AI workload touching personal information',
+      'POPIA Section 72 and Section 26 exposure analysis',
+      'Sector-specific review (SARB Directive 3, SAM, CMS) as applicable',
+      'A prioritised remediation path, written for both legal and engineering',
+    ],
+    deliverable: 'A board-ready assessment report and a one-page architecture risk summary.',
+    who: 'A CIO or CRO who has been asked "is our AI POPIA-compliant?" and needs a defensible answer.',
+  },
+  {
+    num: '02',
+    name: 'Sovereign Reference Architecture',
+    duration: '4 to 6 weeks',
+    summary: 'A documented, deployable architecture for one priority AI use case, designed to satisfy the regulation by construction.',
+    includes: [
+      'Target architecture for one use case (e.g. claims RAG, AML monitoring)',
+      'Deployment pattern selection: on-prem, sovereign cloud, or hybrid',
+      'Controls for logging, vector stores, and inference state',
+      'A design document your legal and risk teams can sign off on',
+    ],
+    deliverable: 'A reference architecture document and diagram set, plus a build estimate.',
+    who: 'A team that knows its exposure and needs a concrete, compliant design to build toward.',
+  },
+  {
+    num: '03',
+    name: 'Build & Integrate',
+    duration: 'Scoped per engagement',
+    summary: 'Implementation of the reference architecture: a working, observable, sovereign AI system integrated into your stack.',
+    includes: [
+      'vLLM / sovereign inference setup on chosen infrastructure',
+      'Retrieval pipeline with PII controls at every layer',
+      'Observability, audit logging, and evaluation harness',
+      'Handover documentation and team enablement',
+    ],
+    deliverable: 'A production-grade system, the runbook, and the audit trail to prove it.',
+    who: 'A team ready to deploy and that wants the compliance built in, not bolted on.',
+  },
+];
+---
+
+<Layout
+  title="Services — Custos"
+  description="Three packaged engagements for sovereign, POPIA-compliant AI: Readiness Assessment, Sovereign Reference Architecture, and Build & Integrate."
+>
+  <!-- HERO -->
+  <section class="grid-bg">
+    <div class="wrap" style="padding: 5rem 1.5rem 3rem;">
+      <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">Services</span> &nbsp;//&nbsp; three engagements</p>
+      <h1 class="h-display" style="max-width: 16ch; font-size: clamp(2rem, 5vw, 3rem);">
+        From "are we compliant?" to a system in production.
+      </h1>
+      <p class="lead" style="margin: 1.75rem 0 0; max-width: 54ch;">
+        Three engagements that build on each other. Start where you are. Each one stands alone and feeds the next.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="wrap" style="padding: 2rem 1.5rem;">
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {services.map((s) => (
+        <div style="border: 1px solid var(--border); border-radius: 12px; background: var(--bg-surface); padding: 2.25rem; transition: border-color 0.18s;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+              <span class="spec-num" style="font-size: 1.1rem;">{s.num}</span>
+              <h2 style="font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0; letter-spacing: -0.025em;">{s.name}</h2>
+            </div>
+            <span class="chip">{s.duration}</span>
+          </div>
+
+          <p style="margin: 0 0 1.75rem; font-size: 1rem; color: var(--text-muted); line-height: 1.65; max-width: 64ch;">{s.summary}</p>
+
+          <div class="grid-service">
+            <div>
+              <p class="label" style="margin: 0 0 0.9rem;">What's included</p>
+              <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.6rem;">
+                {s.includes.map((item) => (
+                  <li style="display: flex; gap: 0.7rem; font-size: 0.9rem; color: var(--text); line-height: 1.5;">
+                    <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace; flex-shrink: 0;">+</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div>
+                <p class="label" style="margin: 0 0 0.6rem;">Deliverable</p>
+                <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">{s.deliverable}</p>
+              </div>
+              <div>
+                <p class="label" style="margin: 0 0 0.6rem;">Who it's for</p>
+                <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">{s.who}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+    <div style="border: 1px solid rgba(34,211,238,0.2); border-radius: 12px; background: linear-gradient(135deg, rgba(34,211,238,0.06), transparent 60%), var(--bg-surface); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+      <div>
+        <h2 class="h-section" style="font-size: 1.5rem; margin: 0 0 0.5rem;">Not sure which one you need?</h2>
+        <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); max-width: 48ch; line-height: 1.6;">Most engagements start with a 25-minute working session. No pitch. We figure out where you actually are.</p>
+      </div>
+      <a href="/contact" style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #0a0a0a; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; white-space: nowrap;">
+        Start the conversation
+      </a>
+    </div>
+  </section>
+</Layout>

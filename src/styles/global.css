@@ -24,7 +24,7 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-body { margin: 0; min-height: 100vh; }
+body { margin: 0; min-height: 100vh; overflow-x: hidden; }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-hover); }
@@ -48,6 +48,164 @@ code:not(pre code) {
   padding: 0.15em 0.4em;
   font-size: 0.875em;
   color: var(--accent);
+}
+
+/* ============================================================
+   Architecture-document design system
+   ============================================================ */
+
+/* Layout shells */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+.wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Monospace eyebrow / section label */
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.label-accent { color: var(--accent); }
+
+/* Numbered section marker e.g. [ 01 ] */
+.sec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+/* Thin labeled rule that spans a section header */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2.5rem;
+}
+.rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Section heading scale */
+.h-display {
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+.h-display .accent { color: var(--accent); }
+.h-section {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin: 0;
+}
+.lead {
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Bordered card */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  padding: 1.75rem;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.card:hover { border-color: rgba(34,211,238,0.35); background: #131313; }
+
+/* Numbered spec block (the 01/02/03 offering rows) */
+.spec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* Mono chip / tag */
+.chip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(34,211,238,0.15);
+  border-radius: 3px;
+  padding: 0.18rem 0.5rem;
+}
+
+/* Faint grid background for hero sections */
+.grid-bg {
+  position: relative;
+}
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(800px 480px at 30% 20%, black, transparent 80%);
+  mask-image: radial-gradient(800px 480px at 30% 20%, black, transparent 80%);
+  pointer-events: none;
+}
+.grid-bg > * { position: relative; }
+
+/* Data-flow / boundary diagram primitives */
+.flow-node {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-surface);
+  color: var(--text);
+}
+.flow-node.boundary { border-color: rgba(34,211,238,0.4); color: var(--accent); }
+.flow-arrow { color: var(--text-subtle); font-family: 'JetBrains Mono', monospace; }
+
+/* Responsive grid utilities (replace inline grid-template-columns) */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.grid-method { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.grid-about { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3.5rem; align-items: start; }
+.grid-footer { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; }
+.grid-reg { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; }
+.grid-service { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2.5rem; }
+
+/* Desktop nav row */
+.nav-links { display: flex; gap: 1.75rem; align-items: center; }
+.nav-links .nav-cta { white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2, .grid-method, .grid-about, .grid-service { grid-template-columns: 1fr; gap: 2rem; }
+  .grid-reg { grid-template-columns: 1fr; gap: 0.75rem; }
+  .grid-footer { grid-template-columns: 1fr 1fr; }
+  .grid-about aside { position: static !important; }
+}
+
+@media (max-width: 620px) {
+  /* Collapse primary nav to logo + CTA only; full nav lives in footer */
+  .nav-links a:not(.nav-cta) { display: none; }
+  .h-display { font-size: 1.75rem !important; max-width: 100% !important; }
+  .lead { font-size: 1rem; }
+  .grid-footer { grid-template-columns: 1fr; gap: 1.5rem; }
+  .flow-row { flex-direction: column; align-items: stretch !important; }
+  .flow-row .flow-arrow { transform: rotate(90deg); align-self: center; }
 }
 
 .prose {
