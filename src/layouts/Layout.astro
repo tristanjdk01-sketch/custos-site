@@ -5,13 +5,19 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  /** Pass for blog posts: marks the page as an article with author + date. */
+  article?: { publishedTime?: string; author?: string; tags?: string[] };
 }
 
 const {
   title,
   description = 'Sovereign AI architecture for SA regulated industries. POPIA-compliant AI deployments for medical aid, banking, and insurance.',
   ogImage = '/og-default.png',
+  article,
 } = Astro.props;
+
+const ogType = article ? 'article' : 'website';
+const articleAuthor = article?.author ?? 'Tristan de Kock';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
@@ -68,6 +74,19 @@ const jsonLd = {
       publisher: { '@id': `${siteUrl}/#organization` },
       inLanguage: 'en-ZA',
     },
+    // For blog posts, add an Article node so Google shows author + date.
+    ...(article
+      ? [{
+          '@type': 'Article',
+          headline: title,
+          description,
+          author: { '@id': `${siteUrl}/#tristan` },
+          publisher: { '@id': `${siteUrl}/#organization` },
+          ...(article.publishedTime ? { datePublished: article.publishedTime } : {}),
+          mainEntityOfPage: canonicalURL.toString(),
+          inLanguage: 'en-ZA',
+        }]
+      : []),
   ],
 };
 ---
@@ -84,7 +103,14 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {article && (
+      <>
+        <meta property="article:author" content={articleAuthor} />
+        {article.publishedTime && <meta property="article:published_time" content={article.publishedTime} />}
+        {article.tags?.map((t) => <meta property="article:tag" content={t} />)}
+      </>
+    )}
     <meta property="og:site_name" content="Custos" />
     <meta property="og:locale" content="en_ZA" />
     <meta property="og:url" content={canonicalURL} />
