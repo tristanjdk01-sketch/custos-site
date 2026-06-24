@@ -127,13 +127,13 @@ const steps = [
 
   <!-- CTA -->
   <section class="wrap reveal" style="padding: 4rem 1.5rem 0;">
-    <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(58,157,142,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem; text-align: center;">
+    <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59, 130, 246,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem; text-align: center;">
       <p class="label label-accent" style="margin: 0 0 1rem;">For CIOs, CROs, and Heads of Data</p>
       <h2 class="h-section" style="margin: 0 auto; max-width: 24ch;">"Where does our AI data actually live?" If the answer isn't clean, that's the conversation.</h2>
       <p style="margin: 1.25rem auto 2rem; font-size: 0.95rem; color: var(--text-muted); max-width: 44ch; line-height: 1.65;">
         25 minutes. No pitch. A working session on your AI workloads and where the regulatory exposure sits.
       </p>
-      <a href="/contact" style="display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #06100e; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600;">
+      <a href="/contact" style="display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #04122e; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600;">
         Start the conversation
       </a>
     </div>
@@ -153,8 +153,8 @@ const steps = [
     content: "";
     position: absolute; inset: 0;
     background:
-      radial-gradient(1100px 700px at 78% 38%, rgba(58,157,142,0.13), transparent 60%),
-      radial-gradient(800px 600px at 6% 95%, rgba(201,162,75,0.05), transparent 55%);
+      radial-gradient(1100px 700px at 78% 38%, rgba(59, 130, 246,0.13), transparent 60%),
+      radial-gradient(800px 600px at 6% 95%, rgba(245, 158, 11,0.05), transparent 55%);
     pointer-events: none;
   }
   .hero::after {
@@ -203,11 +203,11 @@ const steps = [
   }
   .btn-primary {
     font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-    background: var(--accent); color: #06100e; padding: 0.78rem 1.4rem;
+    background: var(--accent); color: #04122e; padding: 0.78rem 1.4rem;
     border-radius: 7px; font-weight: 600;
     transition: box-shadow .3s, transform .15s;
   }
-  .btn-primary:hover { box-shadow: 0 10px 34px -8px rgba(58,157,142,0.55); transform: translateY(-1px); color: #06100e; }
+  .btn-primary:hover { box-shadow: 0 10px 34px -8px rgba(59, 130, 246,0.55); transform: translateY(-1px); color: #04122e; }
   .btn-ghost {
     font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
     color: var(--brass); border: 1px solid var(--brass-border);
@@ -256,10 +256,10 @@ const steps = [
     }
 
     const rings = [
-      { r: 560, lw: 2, c: 'rgba(58,157,142,0.10)', spd: 0.3, gap: 1.1 },
-      { r: 470, lw: 3, c: 'rgba(58,157,142,0.22)', spd: -0.5, gap: 1.5 },
-      { r: 380, lw: 4, c: 'rgba(58,157,142,0.45)', spd: 0.7, gap: 1.2 },
-      { r: 300, lw: 6, c: 'rgba(58,157,142,0.85)', spd: -0.9, gap: 1.7 },
+      { r: 560, lw: 2, c: 'rgba(59, 130, 246,0.10)', spd: 0.3, gap: 1.1 },
+      { r: 470, lw: 3, c: 'rgba(59, 130, 246,0.22)', spd: -0.5, gap: 1.5 },
+      { r: 380, lw: 4, c: 'rgba(59, 130, 246,0.45)', spd: 0.7, gap: 1.2 },
+      { r: 300, lw: 6, c: 'rgba(59, 130, 246,0.85)', spd: -0.9, gap: 1.7 },
     ];
 
     function draw() {
@@ -280,17 +280,17 @@ const steps = [
 
       const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 140);
-      grad.addColorStop(0, 'rgba(201,162,75,' + (0.30 + 0.12 * pulse) + ')');
-      grad.addColorStop(1, 'rgba(201,162,75,0)');
+      grad.addColorStop(0, 'rgba(245, 158, 11,' + (0.30 + 0.12 * pulse) + ')');
+      grad.addColorStop(1, 'rgba(245, 158, 11,0)');
       ctx.fillStyle = grad;
       ctx.beginPath(); ctx.arc(cx, cy, 140, 0, Math.PI * 2); ctx.fill();
 
-      ctx.fillStyle = '#c9a24b';
+      ctx.fillStyle = '#f59e0b';
       ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI * 2); ctx.fill();
 
-      ctx.strokeStyle = 'rgba(95,199,181,0.22)'; ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(147, 197, 253,0.22)'; ctx.lineWidth = 1.5;
       ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
-      ctx.fillStyle = '#5fc7b5';
+      ctx.fillStyle = '#93c5fd';
       ctx.beginPath(); ctx.arc(nx, ny, 7, 0, Math.PI * 2); ctx.fill();
 
       ctx.restore();
