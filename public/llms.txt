@@ -4,10 +4,10 @@
 > regulated industries: medical aid, banking, and insurance. The focus is
 > production AI that can be defended to a regulator, not just deployed.
 
-Custos is a consultancy practice by Tristan de Kock (AI Automation Engineer,
-Cape Town, South Africa). It helps SA enterprises deploy production AI on
-sovereign infrastructure (on-premises GPU, Cassava AI Factory, or hybrid)
-with POPIA compliance built into the architecture.
+Custos is a consultancy practice based in Cape Town, South Africa. It helps
+SA enterprises deploy production AI on sovereign infrastructure (on-premises
+GPU, Cassava AI Factory, or hybrid) with POPIA compliance built into the
+architecture.
 
 ## What Custos does
 
@@ -36,10 +36,10 @@ with POPIA compliance built into the architecture.
 - Approach (method + SA regulatory frame): https://custosza.com/approach
 - Services (three engagements): https://custosza.com/services
 - Writing (technical posts on sovereign AI, POPIA): https://custosza.com/writing
-- About (Tristan de Kock): https://custosza.com/about
+- About (the practice): https://custosza.com/about
 - Contact: https://custosza.com/contact
 
 ## Contact
 
-LinkedIn: https://www.linkedin.com/in/tristandekock
+Email: hello@custosza.com
 Location: Cape Town, South Africa (SAST, UTC+2)

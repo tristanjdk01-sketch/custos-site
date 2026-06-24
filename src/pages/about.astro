@@ -1,25 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const creds = [
-  { label: 'Day role', value: 'AI Automation Engineer — PerformanceX & Digital Authority Partners' },
-  { label: 'Stack', value: 'Anthropic Claude SDK, Modal, Supabase, n8n, Python, TypeScript' },
+const facts = [
+  { label: 'Focus', value: 'Sovereign, POPIA-compliant AI architecture' },
+  { label: 'Industries', value: 'Medical aid, banking, insurance' },
   { label: 'Base', value: 'Cape Town, South Africa (SAST, UTC+2)' },
-  { label: 'Next certs', value: 'CKA, Terraform Associate, AI-102' },
+  { label: 'Infrastructure', value: 'On-prem GPU, Cassava AI Factory, hybrid' },
+];
+
+const principles = [
+  {
+    title: 'Compliance by construction',
+    body: 'AI governance is usually a policy document. Custos treats it as an architecture decision: the controls live in the data flow, so the system is defensible by design rather than by paperwork.',
+  },
+  {
+    title: 'Sovereignty over residency',
+    body: 'Where data sits is not the same as who can compel access to it. Custos designs for jurisdictional control, not just a local data-centre region.',
+  },
+  {
+    title: 'Specialist, not auditor',
+    body: 'The work leads with what good architecture looks like for regulated AI, grounded in the SA regulatory frame: POPIA, SARB Directive 3, SAM.',
+  },
 ];
 ---
 
 <Layout
   title="About — Custos"
-  description="Tristan de Kock. AI Automation Engineer building sovereign, POPIA-compliant AI architecture for SA regulated industries."
+  description="Custos designs sovereign, POPIA-compliant AI architecture for South African regulated industries: medical aid, banking, and insurance."
 >
   <!-- HERO -->
   <section class="grid-bg">
     <div class="wrap" style="padding: 5rem 1.5rem 3rem;">
-      <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">About</span> &nbsp;//&nbsp; the person and the venture</p>
-      <h1 class="h-display" style="font-size: clamp(2rem, 5vw, 3rem); max-width: 16ch;">Tristan de Kock</h1>
-      <p class="lead" style="margin: 1.75rem 0 0; max-width: 54ch;">
-        AI Automation Engineer in Cape Town, building production agentic systems by day and the architecture for sovereign AI in SA regulated industries through Custos.
+      <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">About</span> &nbsp;//&nbsp; the practice</p>
+      <h1 class="h-display" style="font-size: clamp(2rem, 5vw, 3rem); max-width: 18ch;">
+        Sovereign AI architecture for SA regulated industries.
+      </h1>
+      <p class="lead" style="margin: 1.75rem 0 0; max-width: 56ch;">
+        Custos helps South African medical schemes, banks, and insurers deploy production AI on sovereign infrastructure, with POPIA compliance built into the architecture rather than bolted on afterwards.
       </p>
     </div>
   </section>
@@ -30,46 +47,64 @@ const creds = [
       <!-- Narrative -->
       <div class="prose" style="max-width: none;">
         <p>
-          By day I build production agentic systems and LLM pipelines at PerformanceX and Digital Authority Partners. Custos is the practice I am building around a specific problem: South African enterprises in regulated industries need to deploy production AI on sovereign infrastructure, and most do not yet have the architectural depth, or a trustworthy local partner, to do it correctly.
+          South African enterprises in regulated industries are under pressure to adopt AI, and most are doing it on infrastructure that routes personal data through foreign jurisdictions. That creates real obligations under POPIA, the Banks Act and SARB directives, and the insurance regime, most of which surface only when a regulator or a legal team starts asking where the data actually goes.
         </p>
 
-        <h2>The problem Custos exists for</h2>
+        <h2>What Custos does</h2>
         <p>
-          POPIA Section 72 restricts cross-border transfers of personal information. For health data, financial data, and biometrics, the default cloud AI pattern (a US-controlled model routed through offshore data centres) creates real compliance obligations most teams have not addressed. Cassava AI Factory changed the infrastructure equation in October 2025. The architecture problem is what is left to solve, and it is the work I want to do.
+          Custos designs the architecture that keeps regulated AI sovereign and defensible. The work spans a POPIA AI readiness assessment, a documented reference architecture for a priority use case, and the build and integration of a production system, on owned hardware, sovereign cloud such as Cassava AI Factory, or a hybrid of the two.
         </p>
 
-        <h2>What I'm doing now</h2>
+        <h2>How Custos works</h2>
         <p>
-          Reading POPIA end to end, building production RAG pipelines over compliance documents, benchmarking vLLM on rented H100s, and writing about what I learn. The writing is public on purpose: this field rewards demonstrated depth over claimed expertise.
+          The starting point is always the data flow: the specific places personal information moves when a model runs, from storage to embeddings to prompt history to inference state. That map is what makes a sovereign architecture possible to design and possible to defend.
         </p>
 
-        <h2>The venture, honestly</h2>
+        <h2>The context</h2>
         <p>
-          Custos is not yet a registered company. I am validating demand before formalising the business, which is deliberate. The path I am building toward is Cassava Cloud Partner status as a systems integrator, with real SA case studies as proof. The first engagement on offer is a <strong>POPIA AI Readiness Assessment</strong>.
+          Cassava AI Factory gave South Africa credible sovereign GPU compute at scale in October 2025. The question for a regulated enterprise has shifted from whether sovereign AI is possible to what its deployment path should be. Custos exists to answer that question, in architecture a CIO can take to legal, risk, and the regulator.
         </p>
+
         <p>
-          If you are a CIO, CRO, or Head of Data at a SA medical aid, bank, or insurer, and "where does our AI data live?" does not have a clean answer yet, that is the conversation I want. 25 minutes, no pitch.
+          If you are responsible for AI, data, or risk at a SA medical aid, bank, or insurer, and "where does our AI data actually live?" does not yet have a clean answer, that is the conversation worth having.
         </p>
+
+        <a href="/contact" style="display: inline-block; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #04122e; background: var(--accent); padding: 0.7rem 1.3rem; border-radius: 6px; font-weight: 600; text-decoration: none;">
+          Start the conversation
+        </a>
       </div>
 
       <!-- Spec sidebar -->
       <aside style="position: sticky; top: 84px;">
-        <div style="border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); padding: 1.75rem;">
-          <p class="label" style="margin: 0 0 1.25rem;">Profile</p>
+        <div style="border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); padding: 1.75rem; box-shadow: var(--elev-2);">
+          <p class="label" style="margin: 0 0 1.25rem;">At a glance</p>
           <div style="display: flex; flex-direction: column; gap: 1.1rem;">
-            {creds.map((c) => (
+            {facts.map((f) => (
               <div>
-                <p style="margin: 0 0 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;">{c.label}</p>
-                <p style="margin: 0; font-size: 0.85rem; color: var(--text); line-height: 1.5;">{c.value}</p>
+                <p style="margin: 0 0 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;">{f.label}</p>
+                <p style="margin: 0; font-size: 0.85rem; color: var(--text); line-height: 1.5;">{f.value}</p>
               </div>
             ))}
           </div>
-          <a href="https://www.linkedin.com/in/tristandekock" target="_blank" rel="noopener" style="display: block; text-align: center; margin-top: 1.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); border: 1px solid var(--accent-border); padding: 0.6rem; border-radius: 6px;">
-            Connect on LinkedIn &rarr;
-          </a>
         </div>
       </aside>
 
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+    <div class="rule">
+      <span class="sec-num">[ HOW ]</span>
+      <h2 class="label" style="margin: 0;">Operating principles</h2>
+    </div>
+    <div class="grid-3 stagger reveal">
+      {principles.map((p) => (
+        <div class="card">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{p.title}</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{p.body}</p>
+        </div>
+      ))}
     </div>
   </section>
 </Layout>

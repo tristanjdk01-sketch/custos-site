@@ -17,7 +17,7 @@ const {
 } = Astro.props;
 
 const ogType = article ? 'article' : 'website';
-const articleAuthor = article?.author ?? 'Tristan de Kock';
+const articleAuthor = article?.author ?? 'Custos';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
@@ -32,8 +32,8 @@ const nav = [
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
 
-// Structured data: tells search engines who Custos is, who Tristan is, and
-// that this is the canonical site. Helps own branded + niche-term searches.
+// Structured data: tells search engines who Custos is and that this is the
+// canonical site. Helps own branded + niche-term searches.
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://custosza.com';
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -47,16 +47,6 @@ const jsonLd = {
       description:
         'Sovereign, POPIA-compliant AI architecture for South African regulated industries: medical aid, banking, and insurance.',
       areaServed: { '@type': 'Country', name: 'South Africa' },
-      founder: { '@id': `${siteUrl}/#tristan` },
-      sameAs: ['https://www.linkedin.com/in/tristandekock'],
-    },
-    {
-      '@type': 'Person',
-      '@id': `${siteUrl}/#tristan`,
-      name: 'Tristan de Kock',
-      jobTitle: 'AI Automation Engineer',
-      url: `${siteUrl}/about`,
-      worksFor: { '@id': `${siteUrl}/#organization` },
       knowsAbout: [
         'Sovereign AI',
         'POPIA compliance',
@@ -64,7 +54,6 @@ const jsonLd = {
         'LLM architecture',
         'Regulated industry AI',
       ],
-      sameAs: ['https://www.linkedin.com/in/tristandekock'],
     },
     {
       '@type': 'WebSite',
@@ -74,13 +63,13 @@ const jsonLd = {
       publisher: { '@id': `${siteUrl}/#organization` },
       inLanguage: 'en-ZA',
     },
-    // For blog posts, add an Article node so Google shows author + date.
+    // For blog posts, add an Article node so Google shows date.
     ...(article
       ? [{
           '@type': 'Article',
           headline: title,
           description,
-          author: { '@id': `${siteUrl}/#tristan` },
+          author: { '@id': `${siteUrl}/#organization` },
           publisher: { '@id': `${siteUrl}/#organization` },
           ...(article.publishedTime ? { datePublished: article.publishedTime } : {}),
           mainEntityOfPage: canonicalURL.toString(),
@@ -180,8 +169,8 @@ const jsonLd = {
           <div>
             <p class="label" style="margin: 0 0 0.9rem;">Connect</p>
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-              <a href="https://www.linkedin.com/in/tristandekock" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--text-muted);">LinkedIn</a>
               <a href="/contact" style="font-size: 0.85rem; color: var(--text-muted);">Get in touch</a>
+              <a href="mailto:hello@custosza.com" style="font-size: 0.85rem; color: var(--text-muted);">hello@custosza.com</a>
               <a href="/rss.xml" style="font-size: 0.85rem; color: var(--text-muted);">RSS</a>
             </div>
           </div>

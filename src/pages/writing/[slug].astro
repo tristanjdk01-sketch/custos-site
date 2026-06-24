@@ -15,7 +15,7 @@ const { Content } = await render(post);
 
 const articleMeta = {
   publishedTime: post.data.pubDate?.toISOString(),
-  author: 'Tristan de Kock',
+  author: 'Custos',
   tags: post.data.tags,
 };
 ---
@@ -49,7 +49,7 @@ const articleMeta = {
           {post.data.pubDate.toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
         <span style="color: var(--border);">·</span>
-        <span style="font-size: 0.8rem; color: var(--text-subtle);">Tristan de Kock</span>
+        <span style="font-size: 0.8rem; color: var(--text-subtle);">Custos</span>
       </div>
     </header>
 
@@ -66,8 +66,8 @@ const articleMeta = {
       <a href="/writing" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted);">
         &larr; All writing
       </a>
-      <a href="https://www.linkedin.com/in/tristandekock" target="_blank" rel="noopener" style="font-size: 0.8rem; color: var(--accent);">
-        Follow on LinkedIn
+      <a href="/contact" style="font-size: 0.8rem; color: var(--accent);">
+        Get in touch &rarr;
       </a>
     </div>
 
