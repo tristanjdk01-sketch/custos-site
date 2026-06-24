@@ -31,13 +31,46 @@
 
 /* Serif accent line (gravitas) */
 .serif { font-family: var(--serif); font-weight: 600; }
-/* Serif italic emphasis inside a display heading */
-.h-display .serif-em {
+/* Serif italic emphasis inside any display heading */
+.serif-em {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--accent-bright);
+}
+
+/* ---- Elevation system (modern-web-design skill) ---- */
+:root {
+  --elev-1: 0 1px 3px rgba(0,0,0,0.4);
+  --elev-2: 0 6px 16px -4px rgba(0,0,0,0.5);
+  --elev-3: 0 16px 40px -12px rgba(0,0,0,0.6);
+  --elev-glow: 0 20px 60px -24px rgba(58,157,142,0.35);
+}
+
+/* Glass surface for raised cards */
+.glass {
+  background: linear-gradient(180deg, rgba(22,28,26,0.85), rgba(16,20,19,0.7));
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: var(--elev-2);
+}
+
+/* Staggered reveal children */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.stagger.in > * { opacity: 1; transform: translateY(0); }
+.stagger.in > *:nth-child(1) { transition-delay: .00s; }
+.stagger.in > *:nth-child(2) { transition-delay: .08s; }
+.stagger.in > *:nth-child(3) { transition-delay: .16s; }
+.stagger.in > *:nth-child(4) { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 * { box-sizing: border-box; }
@@ -141,15 +174,30 @@ code:not(pre code) {
   font-weight: 400;
 }
 
-/* Bordered card */
+/* Bordered card with depth */
 .card {
+  position: relative;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-surface);
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--bg-surface), var(--bg));
   padding: 1.75rem;
-  transition: border-color 0.18s ease, background 0.18s ease;
+  box-shadow: var(--elev-1);
+  transition: border-color 0.22s ease, transform 0.22s cubic-bezier(.2,.7,.2,1), box-shadow 0.22s ease;
+  will-change: transform;
 }
-.card:hover { border-color: rgba(58,157,142,0.35); background: #131a18; }
+.card:hover {
+  border-color: rgba(58,157,142,0.4);
+  transform: translateY(-4px);
+  box-shadow: var(--elev-3), var(--elev-glow);
+}
+/* hairline top highlight for depth */
+.card::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(95,199,181,0.3), transparent);
+  opacity: 0; transition: opacity 0.22s ease;
+}
+.card:hover::before { opacity: 1; }
 
 /* Numbered spec block (the 01/02/03 offering rows) */
 .spec-num {

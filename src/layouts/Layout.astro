@@ -55,12 +55,7 @@ const isActive = (href: string) =>
     <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(11,14,13,0.82);">
       <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 60px;">
         <a href="/" style="color: #fff; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;">
-          <svg width="28" height="28" viewBox="0 0 76 76" fill="none" aria-hidden="true" style="flex-shrink: 0;">
-            <circle cx="38" cy="38" r="30" stroke="var(--accent)" stroke-width="4"/>
-            <path d="M55 23 A30 30 0 1 0 55 53" stroke="var(--bg)" stroke-width="10" fill="none"/>
-            <path d="M55 23 A30 30 0 1 0 55 53" stroke="var(--accent)" stroke-width="4" fill="none"/>
-            <circle cx="38" cy="38" r="7" fill="var(--brass)"/>
-          </svg>
+          <img src="/logo-mark.svg" width="28" height="28" alt="" style="flex-shrink: 0; display: block;" />
           Custos<span style="color: var(--text-subtle); font-weight: 500;">.za</span>
         </a>
         <nav class="nav-links">
@@ -88,12 +83,7 @@ const isActive = (href: string) =>
         <div class="grid-footer" style="margin-bottom: 2.5rem;">
           <div>
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-              <svg width="22" height="22" viewBox="0 0 76 76" fill="none" aria-hidden="true">
-                <circle cx="38" cy="38" r="30" stroke="var(--accent)" stroke-width="4"/>
-                <path d="M55 23 A30 30 0 1 0 55 53" stroke="var(--bg)" stroke-width="10" fill="none"/>
-                <path d="M55 23 A30 30 0 1 0 55 53" stroke="var(--accent)" stroke-width="4" fill="none"/>
-                <circle cx="38" cy="38" r="7" fill="var(--brass)"/>
-              </svg>
+              <img src="/logo-mark.svg" width="22" height="22" alt="" style="display: block;" />
               <span style="color: #fff; font-weight: 700;">Custos<span style="color: var(--text-subtle); font-weight: 500;">.za</span></span>
             </div>
             <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 32ch;">
@@ -128,5 +118,30 @@ const isActive = (href: string) =>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Site-wide scroll reveal + magnetic micro-interactions (modern-web-design skill)
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      const fine = window.matchMedia('(pointer: fine)').matches;
+      const noReduce = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (fine && noReduce) {
+        document.querySelectorAll('[data-magnetic]').forEach((el) => {
+          el.style.transition = 'transform .25s cubic-bezier(.2,.7,.2,1)';
+          el.addEventListener('mousemove', (e) => {
+            const r = el.getBoundingClientRect();
+            const dx = e.clientX - (r.left + r.width / 2);
+            const dy = e.clientY - (r.top + r.height / 2);
+            el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.35}px)`;
+          });
+          el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+        });
+      }
+    </script>
   </body>
 </html>
