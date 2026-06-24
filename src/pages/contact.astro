@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Formspree form ID. Replace the placeholder with your real ID from
+// formspree.io (the part after /f/). Until then the form is disabled
+// and the email fallback below still works.
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
+const formReady = FORMSPREE_ID !== 'YOUR_FORM_ID';
 ---
 
 <Layout
@@ -7,7 +14,7 @@ import Layout from '../layouts/Layout.astro';
   description="Start a conversation about sovereign, POPIA-compliant AI for your SA medical aid, bank, or insurer. 25 minutes, no pitch."
 >
   <section class="grid-bg">
-    <div class="wrap-narrow" style="padding: 5rem 1.5rem 3rem;">
+    <div class="wrap-narrow" style="padding: 5rem 1.5rem 2.5rem;">
       <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">Contact</span> &nbsp;//&nbsp; start here</p>
       <h1 class="h-display" style="font-size: clamp(2rem, 5vw, 2.75rem); max-width: 18ch;">
         25 minutes. No pitch.
@@ -18,22 +25,134 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="wrap-narrow" style="padding: 1rem 1.5rem;">
-    <div class="grid-2" style="gap: 1.25rem;">
-      <a href="mailto:hello@custosza.com?subject=Sovereign%20AI%20enquiry" class="card" style="display: block;">
-        <p class="label" style="margin: 0 0 0.75rem;">Email</p>
-        <p style="margin: 0 0 0.4rem; font-size: 1.05rem; font-weight: 600; color: #fff;">hello@custosza.com &rarr;</p>
-        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">The fastest way to reach Custos. Mention your industry and the AI workload you have in mind.</p>
-      </a>
-      <div class="card">
-        <p class="label" style="margin: 0 0 0.75rem;">What happens next</p>
-        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">A short call to map your AI workloads and where the regulatory exposure sits. If there is a fit, we scope a Readiness Assessment from there.</p>
-      </div>
-    </div>
+  <section class="wrap-narrow" style="padding: 0 1.5rem;">
+    <div class="grid-about" style="gap: 2.5rem;">
 
-    <div style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-      <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-subtle);">Cape Town, South Africa</p>
-      <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-subtle);">SAST · UTC+2</p>
+      <!-- Form -->
+      <form id="contact-form" action={formAction} method="POST" novalidate>
+        <div style="display: flex; flex-direction: column; gap: 1.1rem;">
+          <div>
+            <label for="name" class="label" style="display: block; margin: 0 0 0.5rem; color: var(--text-muted);">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" class="field" />
+          </div>
+          <div>
+            <label for="email" class="label" style="display: block; margin: 0 0 0.5rem; color: var(--text-muted);">Work email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" class="field" />
+          </div>
+          <div>
+            <label for="company" class="label" style="display: block; margin: 0 0 0.5rem; color: var(--text-muted);">Company &amp; role</label>
+            <input id="company" name="company" type="text" autocomplete="organization" class="field" placeholder="e.g. CRO at a medical scheme" />
+          </div>
+          <div>
+            <label for="message" class="label" style="display: block; margin: 0 0 0.5rem; color: var(--text-muted);">What's on your mind?</label>
+            <textarea id="message" name="message" rows="5" required class="field" placeholder="The AI workload you have in mind, and the regulatory question behind it."></textarea>
+          </div>
+          <!-- honeypot: bots fill this, humans don't see it -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px;" aria-hidden="true" />
+
+          <button type="submit" id="submit-btn" class="form-submit">Send message</button>
+          <p id="form-status" role="status" aria-live="polite" style="margin: 0; font-size: 0.85rem; min-height: 1.2em;"></p>
+        </div>
+      </form>
+
+      <!-- Sidebar: email fallback + what happens next -->
+      <aside style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <div class="card">
+          <p class="label" style="margin: 0 0 0.75rem;">Prefer email?</p>
+          <a href="mailto:hello@custosza.com?subject=Sovereign%20AI%20enquiry" style="font-size: 0.95rem; font-weight: 600; color: var(--accent);">hello@custosza.com</a>
+        </div>
+        <div class="card">
+          <p class="label" style="margin: 0 0 0.75rem;">What happens next</p>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">A short call to map your AI workloads and where the regulatory exposure sits. If there is a fit, we scope a Readiness Assessment from there.</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding: 0 0.25rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-subtle);">Cape Town, SA</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-subtle);">SAST · UTC+2</span>
+        </div>
+      </aside>
+
     </div>
   </section>
 </Layout>
+
+<style>
+  .field {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+  .field::placeholder { color: var(--text-subtle); }
+  textarea.field { resize: vertical; line-height: 1.5; }
+
+  .form-submit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #04122e;
+    background: var(--accent);
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.3s ease, opacity 0.2s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { box-shadow: 0 10px 34px -8px var(--accent-dim); transform: translateY(-1px); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+</style>
+
+<script define:vars={{ formReady }}>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!formReady) {
+      status.style.color = 'var(--brass)';
+      status.textContent = 'Form not connected yet. Please email hello@custosza.com in the meantime.';
+      return;
+    }
+    if (!form.checkValidity()) {
+      status.style.color = 'var(--brass)';
+      status.textContent = 'Please fill in your name, a valid email, and a message.';
+      return;
+    }
+
+    btn.disabled = true;
+    status.style.color = 'var(--text-muted)';
+    status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        form.reset();
+        status.style.color = 'var(--accent)';
+        status.textContent = 'Thanks. Your message is in. Expect a reply within a working day.';
+      } else {
+        throw new Error('bad response');
+      }
+    } catch {
+      status.style.color = 'var(--brass)';
+      status.textContent = 'Something went wrong. Please email hello@custosza.com directly.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
