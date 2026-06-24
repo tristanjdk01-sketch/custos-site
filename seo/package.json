@@ -1,0 +1,13 @@
+{
+  "name": "custos-seo",
+  "private": true,
+  "type": "module",
+  "description": "SEO toolkit for custosza.com (GSC submit, URL inspection, PSI audits). Adapted from NPU Labs handover.",
+  "scripts": {
+    "audit": "node scripts/psi-audit.mjs",
+    "contrast": "node scripts/psi-contrast-all.mjs",
+    "a11y": "node scripts/psi-a11y-details.mjs",
+    "gsc": "node scripts/gsc-bootstrap.mjs"
+  },
+  "dependencies": { "dotenv": "^16.4.5" }
+}
