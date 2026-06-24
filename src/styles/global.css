@@ -311,8 +311,8 @@ code:not(pre code) {
   font-style: italic;
 }
 
-.prose a { color: var(--accent); }
-.prose a:hover { color: var(--accent-hover); text-decoration: underline; }
+.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.prose a:hover { color: var(--accent-hover); }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
 .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
