@@ -64,7 +64,7 @@ const steps = [
   <!-- residency vs sovereignty diagram (own section, scroll-revealed) -->
   <section class="wrap reveal" style="padding: 1rem 1.5rem 2rem;">
     <div style="border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, var(--bg-surface), var(--bg)); padding: 2rem 2rem; max-width: 760px; box-shadow: 0 24px 60px -30px rgba(0,0,0,0.8);">
-      <p class="label" style="margin: 0 0 1.25rem;">The distinction most pilots miss</p>
+      <p class="card-title" style="margin: 0 0 1.25rem;">The distinction most pilots miss</p>
       <div class="flow-row" style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
         <div class="flow-node">Member data</div>
         <span class="flow-arrow">&rarr;</span>
@@ -133,9 +133,7 @@ const steps = [
       <p style="margin: 1.25rem auto 2rem; font-size: 0.95rem; color: var(--text-muted); max-width: 44ch; line-height: 1.65;">
         25 minutes. No pitch. A working session on your AI workloads and where the regulatory exposure sits.
       </p>
-      <a href="/contact" style="display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #04122e; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600;">
-        Start the conversation
-      </a>
+      <a href="/contact" class="btn-cta">Start the conversation</a>
     </div>
   </section>
 </Layout>
@@ -202,19 +200,20 @@ const steps = [
     opacity: 0; transform: translateY(16px); animation: rise .8s .5s ease forwards;
   }
   .btn-primary {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-    background: var(--accent); color: #04122e; padding: 0.78rem 1.4rem;
-    border-radius: 7px; font-weight: 600;
-    transition: box-shadow .3s, transform .15s;
+    font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    background: var(--accent); color: #04122e; padding: 0.85rem 1.6rem;
+    border-radius: 8px; font-weight: 600;
+    transition: box-shadow .3s, transform .15s, background .2s;
   }
-  .btn-primary:hover { box-shadow: 0 10px 34px -8px rgba(59, 130, 246,0.55); transform: translateY(-1px); color: #04122e; }
+  .btn-primary:hover { box-shadow: 0 10px 34px -8px rgba(59, 130, 246,0.55); transform: translateY(-1px); color: #04122e; background: var(--accent-hover); }
   .btn-ghost {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-    color: var(--brass); border: 1px solid var(--brass-border);
-    padding: 0.78rem 1.4rem; border-radius: 7px;
-    transition: border-color .2s, background .2s;
+    font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: #fff; background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.6rem; border-radius: 8px;
+    transition: border-color .2s, background .2s, transform .15s;
   }
-  .btn-ghost:hover { border-color: var(--brass); background: var(--brass-dim); color: var(--brass); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.10); color: #fff; transform: translateY(-1px); }
 
   @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 

@@ -120,8 +120,8 @@ const jsonLd = {
   </head>
   <body style="background: var(--bg);">
     <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(11,14,13,0.82);">
-      <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 60px;">
-        <a href="/" style="color: #fff; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;">
+      <div class="wrap nav-grid" style="height: 60px;">
+        <a href="/" class="nav-brand" style="color: #fff; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;">
           <img src="/logo-mark.svg" width="28" height="28" alt="" style="flex-shrink: 0; display: block;" />
           Custos<span style="color: var(--text-subtle); font-weight: 500;">.za</span>
         </a>
@@ -134,10 +134,10 @@ const jsonLd = {
               {item.label}
             </a>
           ))}
-          <a href="/contact" class="nav-cta" style="font-size: 0.8125rem; color: var(--brass); border: 1px solid var(--brass-border); padding: 0.4rem 0.85rem; border-radius: 5px; font-family: 'JetBrains Mono', monospace; transition: all 0.15s;">
-            Get in touch
-          </a>
         </nav>
+        <a href="/contact" class="nav-cta" style="font-size: 0.8125rem; color: var(--brass); border: 1px solid var(--brass-border); padding: 0.4rem 0.85rem; border-radius: 5px; font-family: 'JetBrains Mono', monospace; transition: all 0.15s; justify-self: end;">
+          Get in touch
+        </a>
 
         <!-- Mobile hamburger toggle -->
         <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">

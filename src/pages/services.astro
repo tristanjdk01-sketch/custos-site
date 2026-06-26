@@ -55,12 +55,37 @@ const services = [
   <section class="grid-bg">
     <div class="wrap" style="padding: 5rem 1.5rem 3rem;">
       <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">Services</span> &nbsp;//&nbsp; three engagements</p>
-      <h1 class="h-display" style="max-width: 16ch; font-size: clamp(2rem, 5vw, 3rem);">
-        From "are we compliant?" to a system in production.
+      <h1 class="h-display services-h1" style="max-width: 22ch; font-size: clamp(2rem, 5vw, 3rem); text-wrap: balance;">
+        From &ldquo;are we compliant?&rdquo;<br class="br-wide" />to a system in production.
       </h1>
       <p class="lead" style="margin: 1.75rem 0 0; max-width: 54ch;">
         Three engagements that build on each other. Start where you are. Each one stands alone and feeds the next.
       </p>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT PATH (animated, draws on scroll) -->
+  <section class="wrap reveal" style="padding: 1rem 1.5rem 0;">
+    <div class="path-card">
+      <svg class="path-svg" viewBox="0 0 900 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three engagements that build on each other: Readiness Assessment, Sovereign Reference Architecture, then Build and Integrate.">
+        <line class="path-track" x1="90" y1="60" x2="810" y2="60" />
+        <line class="path-draw" x1="90" y1="60" x2="810" y2="60" />
+        <g class="path-stop" data-i="0">
+          <circle cx="90" cy="60" r="11" />
+          <text x="90" y="98" text-anchor="middle">Readiness</text>
+        </g>
+        <g class="path-stop" data-i="1">
+          <circle cx="450" cy="60" r="11" />
+          <text x="450" y="98" text-anchor="middle">Architecture</text>
+        </g>
+        <g class="path-stop" data-i="2">
+          <circle cx="810" cy="60" r="11" />
+          <text x="810" y="98" text-anchor="middle">Build &amp; Integrate</text>
+        </g>
+        <text class="path-num" x="90" y="64" text-anchor="middle">01</text>
+        <text class="path-num" x="450" y="64" text-anchor="middle">02</text>
+        <text class="path-num path-num-last" x="810" y="64" text-anchor="middle">03</text>
+      </svg>
     </div>
   </section>
 
@@ -114,9 +139,65 @@ const services = [
         <h2 class="h-section" style="font-size: 1.5rem; margin: 0 0 0.5rem;">Not sure which one you need?</h2>
         <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); max-width: 48ch; line-height: 1.6;">Most engagements start with a 25-minute working session. No pitch. We figure out where you actually are.</p>
       </div>
-      <a href="/contact" style="font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #04122e; background: var(--accent); padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; white-space: nowrap;">
-        Start the conversation
-      </a>
+      <a href="/contact" class="btn-cta">Start the conversation</a>
     </div>
   </section>
 </Layout>
+
+<style>
+  .path-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--bg-surface), var(--bg));
+    padding: 1.5rem 1.25rem 1rem;
+    box-shadow: 0 24px 60px -34px rgba(0,0,0,0.8);
+  }
+  .path-svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .path-track { stroke: var(--border); stroke-width: 2; }
+  .path-draw {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-dasharray: 720;
+    stroke-dashoffset: 720;
+    transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
+  }
+  .path-card.in .path-draw { stroke-dashoffset: 0; }
+  .path-stop circle {
+    fill: var(--bg);
+    stroke: var(--border);
+    stroke-width: 2;
+    transition: stroke .4s ease, fill .4s ease;
+  }
+  .path-card.in .path-stop[data-i="0"] circle { stroke: var(--accent); transition-delay: .15s; }
+  .path-card.in .path-stop[data-i="1"] circle { stroke: var(--accent); transition-delay: .7s; }
+  .path-card.in .path-stop[data-i="2"] circle { stroke: var(--accent); fill: var(--accent); transition-delay: 1.25s; }
+  .path-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    fill: var(--text-subtle);
+    transition: fill .4s ease;
+  }
+  .path-card.in .path-num-last { fill: #04122e; transition-delay: 1.3s; }
+  .path-stop text:not(.path-num) {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--text-muted);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .path-draw { transition: none; stroke-dashoffset: 0; }
+  }
+</style>
+
+<script>
+  // Draw the engagement path when it scrolls into view
+  const card = document.querySelector('.path-card');
+  if (card) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }
+    }, { threshold: 0.4 });
+    io.observe(card);
+  }
+</script>
