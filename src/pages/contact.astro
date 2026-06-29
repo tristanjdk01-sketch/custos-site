@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase-public';
 
 // Formspree form ID. Replace the placeholder with your real ID from
 // formspree.io (the part after /f/). Until then the form is disabled
@@ -7,6 +8,9 @@ import Layout from '../layouts/Layout.astro';
 const FORMSPREE_ID = 'mvzjqnlq';
 const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
 const formReady = FORMSPREE_ID !== 'YOUR_FORM_ID';
+
+// Public Supabase config for capturing the lead into our own DB (insert-only, RLS-gated).
+const leadsEndpoint = `${SUPABASE_URL}/rest/v1/inbound_leads`;
 ---
 
 <Layout
@@ -111,10 +115,37 @@ const formReady = FORMSPREE_ID !== 'YOUR_FORM_ID';
   .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 </style>
 
-<script define:vars={{ formReady }}>
+<script define:vars={{ formReady, leadsEndpoint, SUPABASE_ANON_KEY }}>
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
   const btn = document.getElementById('submit-btn');
+
+  // Capture the lead into our own Supabase DB (insert-only, RLS-gated).
+  // Fire-and-forget: never block or fail the user on this; Formspree email
+  // is the source of truth for the user-facing result.
+  function captureLead() {
+    try {
+      const data = new FormData(form);
+      if (data.get('_gotcha')) return; // honeypot tripped, skip
+      fetch(leadsEndpoint, {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({
+          name: data.get('name') || '',
+          email: data.get('email') || '',
+          company: data.get('company') || '',
+          message: data.get('message') || '',
+          source: 'website-contact-form',
+          user_agent: navigator.userAgent.slice(0, 300),
+        }),
+      }).catch(() => {});
+    } catch { /* never throw */ }
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -133,6 +164,9 @@ const formReady = FORMSPREE_ID !== 'YOUR_FORM_ID';
     btn.disabled = true;
     status.style.color = 'var(--text-muted)';
     status.textContent = 'Sending…';
+
+    // Capture to our DB in parallel (does not affect the user-facing result).
+    captureLead();
 
     try {
       const res = await fetch(form.action, {
