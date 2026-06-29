@@ -45,9 +45,13 @@ const steps = [
   title="Custos — Sovereign AI architecture for SA regulated industries"
   description="POPIA-compliant AI architecture for South African medical aid, banking, and insurance. Production AI you can defend to your regulator, not just deploy."
 >
-  <!-- HERO (signature: animated guardian aperture) -->
+  <!-- HERO (sovereign AI compute, rooted in Cape Town) -->
   <section class="hero">
-    <canvas id="aperture" width="1360" height="1360" aria-hidden="true"></canvas>
+    <picture class="hero-img" aria-hidden="true">
+      <source srcset="/hero-capetown.webp" type="image/webp" />
+      <img src="/hero-capetown.jpg" alt="" width="2200" height="981" fetchpriority="high" />
+    </picture>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap" style="position: relative; z-index: 2;">
       <p class="hero-eyebrow"><span style="color: var(--accent);">Sovereign AI</span><span class="sep">/</span>South Africa</p>
       <h1 class="hero-h1">Production AI your regulator <span class="serif-em">can't object to.</span></h1>
@@ -147,35 +151,23 @@ const steps = [
     overflow: hidden;
     padding: 4rem 0 5rem;
   }
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0;
+  /* Cape Town hero photo */
+  .hero-img {
+    position: absolute; inset: 0; z-index: 0;
+    display: block;
+  }
+  .hero-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 70% center; /* favour the window / Table Mountain side */
+    display: block;
+  }
+  /* Scrim: dark on the left (behind text), clearer on the right (the view) */
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background:
-      radial-gradient(1100px 700px at 78% 38%, rgba(59, 130, 246,0.13), transparent 60%),
-      radial-gradient(800px 600px at 6% 95%, rgba(245, 158, 11,0.05), transparent 55%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: "";
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-    background-size: 46px 46px;
-    -webkit-mask-image: radial-gradient(900px 600px at 72% 42%, black, transparent 78%);
-    mask-image: radial-gradient(900px 600px at 72% 42%, black, transparent 78%);
-    pointer-events: none;
-  }
-  #aperture {
-    position: absolute;
-    right: -5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 660px;
-    height: 660px;
-    max-width: 60vw;
-    pointer-events: none;
-    z-index: 1;
+      linear-gradient(90deg, rgba(8,11,18,0.94) 0%, rgba(8,11,18,0.82) 34%, rgba(8,11,18,0.45) 62%, rgba(8,11,18,0.30) 100%),
+      linear-gradient(0deg, rgba(8,11,18,0.85) 0%, transparent 40%);
   }
   .hero-eyebrow {
     font-family: 'Inter', sans-serif; font-weight: 600;
@@ -224,18 +216,14 @@ const steps = [
   .reveal.in { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 820px) {
-    /* Aperture becomes an ambient glow behind the hero, not a cramped sidebar */
-    #aperture {
-      right: 50%;
-      top: 38%;
-      transform: translate(50%, -50%);
-      width: 130vw;
-      height: 130vw;
-      max-width: none;
-      opacity: 0.5;
+    /* On phones, push the photo focus to the view and darken more for legibility */
+    .hero-img img { object-position: 62% center; }
+    .hero-scrim {
+      background:
+        linear-gradient(180deg, rgba(8,11,18,0.78) 0%, rgba(8,11,18,0.55) 45%, rgba(8,11,18,0.88) 100%);
     }
-    .hero { min-height: auto; padding: 3rem 0 3.5rem; }
-    .hero-h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
+    .hero { min-height: 78vh; padding: 3rem 0 3.5rem; }
+    .hero-h1 { font-size: clamp(1.6rem, 6.8vw, 2.5rem); max-width: 100%; padding-right: 0.5rem; }
     .hero-eyebrow { margin-bottom: 1.25rem; }
     .hero-sub { margin-top: 1.4rem; font-size: 1rem; }
     .hero-btns { margin-top: 2rem; gap: 0.75rem; }
@@ -250,73 +238,3 @@ const steps = [
     .hero-eyebrow, .hero-h1, .hero-sub, .hero-btns, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 </style>
-
-<script>
-  // Signature animated guardian aperture
-  const cv = document.getElementById('aperture');
-  if (cv && cv.getContext) {
-    const ctx = cv.getContext('2d');
-    const W = cv.width, H = cv.height, cx = W / 2, cy = H / 2;
-    let mx = 0.5, my = 0.5, t = 0;
-    const hero = document.querySelector('.hero');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    hero.addEventListener('mousemove', (e) => {
-      const r = hero.getBoundingClientRect();
-      mx = (e.clientX - r.left) / r.width;
-      my = (e.clientY - r.top) / r.height;
-    });
-
-    function ring(radius, lw, color, gapStart, gapEnd) {
-      ctx.beginPath();
-      ctx.lineWidth = lw;
-      ctx.strokeStyle = color;
-      ctx.arc(cx, cy, radius, gapEnd, gapStart + Math.PI * 2);
-      ctx.stroke();
-    }
-
-    const rings = [
-      { r: 560, lw: 2, c: 'rgba(59, 130, 246,0.10)', spd: 0.3, gap: 1.1 },
-      { r: 470, lw: 3, c: 'rgba(59, 130, 246,0.22)', spd: -0.5, gap: 1.5 },
-      { r: 380, lw: 4, c: 'rgba(59, 130, 246,0.45)', spd: 0.7, gap: 1.2 },
-      { r: 300, lw: 6, c: 'rgba(59, 130, 246,0.85)', spd: -0.9, gap: 1.7 },
-    ];
-
-    function draw() {
-      t += 0.0045;
-      ctx.clearRect(0, 0, W, H);
-      const ox = (mx - 0.5) * 60, oy = (my - 0.5) * 60;
-      ctx.save();
-      ctx.translate(ox, oy);
-
-      for (const rg of rings) {
-        const a = t * rg.spd;
-        ring(rg.r, rg.lw, rg.c, a, a + rg.gap);
-      }
-
-      const ang = t * -0.9, nodeR = 300;
-      const nx = cx + Math.cos(ang + 0.85) * nodeR;
-      const ny = cy + Math.sin(ang + 0.85) * nodeR;
-
-      const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
-      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 140);
-      grad.addColorStop(0, 'rgba(245, 158, 11,' + (0.30 + 0.12 * pulse) + ')');
-      grad.addColorStop(1, 'rgba(245, 158, 11,0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(cx, cy, 140, 0, Math.PI * 2); ctx.fill();
-
-      ctx.fillStyle = '#f59e0b';
-      ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI * 2); ctx.fill();
-
-      ctx.strokeStyle = 'rgba(147, 197, 253,0.22)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
-      ctx.fillStyle = '#93c5fd';
-      ctx.beginPath(); ctx.arc(nx, ny, 7, 0, Math.PI * 2); ctx.fill();
-
-      ctx.restore();
-      if (!reduce) requestAnimationFrame(draw);
-    }
-    draw();
-  }
-
-</script>
