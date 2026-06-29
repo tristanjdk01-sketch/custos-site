@@ -33,6 +33,8 @@ export const products: Product[] = [
     tagline: 'Sovereign claims-document AI for medical schemes',
     industry: 'Medical Aid',
     reg: 'POPIA §26 · CMS',
+    heroImage: 'sentinel-medical',
+    heroAlt: 'A South African medical-scheme administrator reviewing a claims dashboard in a Cape Town office with Table Mountain through the window',
     problem:
       'Schemes are buried in claims, pre-authorisations, and PMB disputes. An LLM could read and triage them in seconds, but every document is special personal information: it cannot touch a foreign API or leave SA jurisdiction.',
     does: [
