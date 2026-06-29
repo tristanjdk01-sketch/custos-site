@@ -97,6 +97,8 @@ export const products: Product[] = [
     tagline: 'Sovereign claims and underwriting explainability engine',
     industry: 'Insurance',
     reg: 'SAM · FSCA · TCF',
+    heroImage: 'adjudicator-insurance',
+    heroAlt: 'Two South African insurance professionals reviewing a claim together in a Cape Town office overlooking the Atlantic coastline',
     problem:
       'Insurers want AI in claims and underwriting, but SAM, FSCA, and Treating Customers Fairly require every automated decision to be explainable and fair, to a regulator and to a customer. A black-box foreign model cannot satisfy that.',
     does: [
