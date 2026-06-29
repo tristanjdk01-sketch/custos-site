@@ -10,6 +10,8 @@ const { product } = Astro.props;
 const p = product;
 const isCustodian = p.slug === 'custodian';
 const isSentinel = p.slug === 'sentinel';
+const isLedger = p.slug === 'ledger';
+const isAdjudicator = p.slug === 'adjudicator';
 ---
 
 <Layout
@@ -91,6 +93,147 @@ const isSentinel = p.slug === 'sentinel';
         <div class="demo-bar">
           <button class="demo-run btn-cta" id="sentinel-run" type="button">Process with Sentinel</button>
           <span class="demo-audit" id="sentinel-audit">Every step logged for the CMS audit trail.</span>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {isLedger && (
+    <!-- INTERACTIVE STR-NARRATIVE DEMO -->
+    <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+      <div class="rule"><span class="sec-num">[ DEMO ]</span><h2 class="label" style="margin: 0;">See Ledger draft an STR narrative</h2></div>
+      <p style="margin: 0 0 1.75rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; max-width: 60ch;">
+        A flagged transaction, worked the way Ledger would: signals weighed, customer risk assessed, and a suspicious-transaction narrative drafted for an analyst to file. Runs on the bank's own infrastructure. An illustration of the workflow, not live customer data.
+      </p>
+
+      <div class="demo demo-ledger">
+        <div class="demo-grid">
+          <!-- Input: flagged transaction -->
+          <div class="demo-doc">
+            <div class="demo-doc-head">
+              <span class="demo-doc-type">Flagged transaction</span>
+              <span class="demo-doc-id">ALERT TM-77310</span>
+            </div>
+            <div class="demo-doc-body">
+              <ul class="txn-list">
+                <li><span class="txn-k">Customer</span><span class="txn-v">Acct ****4471 · onboarded 11 days ago</span></li>
+                <li><span class="txn-k">Activity</span><span class="txn-v"><span class="sig" data-sig>3 cash deposits</span>, R49,500 each, same branch, 4 days</span></li>
+                <li><span class="txn-k">Then</span><span class="txn-v"><span class="sig" data-sig>full EFT to a new third party</span> within 24h</span></li>
+                <li><span class="txn-k">Profile</span><span class="txn-v">stated income <span class="sig" data-sig>R18,000/month</span></span></li>
+              </ul>
+            </div>
+            <div class="demo-doc-foot">
+              <span class="sa-stamp"><span class="sa-dot"></span> Stays in SA</span>
+            </div>
+          </div>
+
+          <!-- Output -->
+          <div class="demo-out">
+            <ol class="demo-steps" id="ledger-steps">
+              <li class="demo-step" data-step="0">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Signals analysed</span><span class="step-detail"><span id="sig-count">3</span> structuring and layering indicators identified</span></div>
+              </li>
+              <li class="demo-step" data-step="1">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Customer risk assessed</span><span class="step-detail">Deposits sit far above stated income · new account</span></div>
+              </li>
+              <li class="demo-step" data-step="2">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Typology matched</span><span class="step-detail">Pattern consistent with structuring then layering</span></div>
+              </li>
+              <li class="demo-step" data-step="3">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Narrative drafted</span><span class="step-detail">Ready for an analyst to review and file</span></div>
+              </li>
+            </ol>
+
+            <div class="demo-draft" id="ledger-draft" hidden>
+              <p class="demo-draft-label">Drafted STR narrative</p>
+              <p class="demo-draft-body">Account ****4471, opened 11 days prior, received <strong>three cash deposits of R49,500</strong> at one branch over four days, each below the R50,000 reporting threshold, followed by a <strong>full EFT to a new beneficiary</strong> within 24 hours. Volume is inconsistent with stated monthly income of R18,000. Pattern is consistent with <strong>structuring and layering</strong>. Recommend submission to the FIC.</p>
+              <p class="demo-flag"><span class="flag-dot"></span> Reasoning trail retained for FIC and SARB</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-bar">
+          <button class="demo-run btn-cta" id="ledger-run" type="button">Draft narrative with Ledger</button>
+          <span class="demo-audit" id="ledger-audit">Analyst-in-the-loop. Ledger never files autonomously.</span>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {isAdjudicator && (
+    <!-- INTERACTIVE EXPLAINABILITY DEMO -->
+    <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+      <div class="rule"><span class="sec-num">[ DEMO ]</span><h2 class="label" style="margin: 0;">See Adjudicator weigh a claim</h2></div>
+      <p style="margin: 0 0 1.75rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; max-width: 60ch;">
+        A sample claim, assessed the way Adjudicator would: a decision, a plain-language rationale, and a fairness check, so the outcome is defensible to the FSCA. An illustration of the workflow, not a live policy.
+      </p>
+
+      <div class="demo demo-adj">
+        <div class="demo-grid">
+          <!-- Input: claim -->
+          <div class="demo-doc">
+            <div class="demo-doc-head">
+              <span class="demo-doc-type">Claim assessment</span>
+              <span class="demo-doc-id">CLM-58207</span>
+            </div>
+            <div class="demo-doc-body">
+              <ul class="txn-list">
+                <li><span class="txn-k">Product</span><span class="txn-v">Funeral cover · R50,000 benefit</span></li>
+                <li><span class="txn-k">Policy age</span><span class="txn-v"><span class="fac" data-fac>5 months</span> · 6-month waiting period</span></li>
+                <li><span class="txn-k">Claim</span><span class="txn-v">Natural-causes death of the main member</span></li>
+                <li><span class="txn-k">Premiums</span><span class="txn-v"><span class="fac" data-fac>all paid, on time</span></span></li>
+              </ul>
+            </div>
+            <div class="demo-doc-foot">
+              <span class="sa-stamp"><span class="sa-dot"></span> Stays in SA</span>
+            </div>
+          </div>
+
+          <!-- Output -->
+          <div class="demo-out">
+            <ol class="demo-steps" id="adj-steps">
+              <li class="demo-step" data-step="0">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Facts extracted</span><span class="step-detail">Policy terms and claim details read</span></div>
+              </li>
+              <li class="demo-step" data-step="1">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Decision reached</span><span class="step-detail">Waiting period applied to the claim date</span></div>
+              </li>
+              <li class="demo-step" data-step="2">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Rationale generated</span><span class="step-detail">Plain-language explanation for the customer</span></div>
+              </li>
+              <li class="demo-step" data-step="3">
+                <span class="step-tick"></span>
+                <div><span class="step-title">Fairness checked</span><span class="step-detail">Outcome tested against comparable claims</span></div>
+              </li>
+            </ol>
+
+            <div class="demo-draft" id="adj-draft" hidden>
+              <div class="adj-verdict">
+                <span class="adj-badge">Decision: Repudiate</span>
+                <span class="adj-route">routed to human reviewer</span>
+              </div>
+              <p class="demo-draft-label" style="margin-top: 0.9rem;">Plain-language rationale</p>
+              <p class="demo-draft-body">The death occurred in policy <strong>month 5</strong>, inside the <strong>6-month waiting period</strong> for natural causes. Premiums were fully paid, so this is a waiting-period outcome, not a lapse. The customer is due a <strong>full refund of premiums</strong>.</p>
+              <div class="fairness">
+                <span class="fairness-label">Fairness check</span>
+                <span class="fairness-bar"><span class="fairness-fill"></span></span>
+                <span class="fairness-val">Consistent with comparable claims</span>
+              </div>
+              <p class="demo-flag" style="color: var(--accent);"><span class="flag-dot" style="background: var(--accent);"></span> Decision + rationale retained for the FSCA</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-bar">
+          <button class="demo-run btn-cta" id="adj-run" type="button">Assess with Adjudicator</button>
+          <span class="demo-audit" id="adj-audit">Every decision is explainable and human-reviewable.</span>
         </div>
       </div>
     </section>
@@ -240,6 +383,52 @@ const isSentinel = p.slug === 'sentinel';
     background: var(--accent-dim); color: var(--accent-bright);
     box-shadow: inset 0 0 0 1px var(--accent-border-soft);
   }
+  /* Ledger transaction list */
+  .txn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+  .txn-list li { display: flex; flex-direction: column; gap: 0.15rem; }
+  .txn-k {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-subtle);
+  }
+  .txn-v { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; }
+  .sig { border-radius: 3px; padding: 0 2px; transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease; }
+  .sig.tagged {
+    background: var(--brass-dim); color: var(--brass);
+    box-shadow: inset 0 0 0 1px var(--brass-border);
+  }
+  /* Adjudicator fact highlight (blue) */
+  .fac { border-radius: 3px; padding: 0 2px; transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease; }
+  .fac.tagged {
+    background: var(--accent-dim); color: var(--accent-bright);
+    box-shadow: inset 0 0 0 1px var(--accent-border-soft);
+  }
+  /* Adjudicator verdict + fairness */
+  .adj-verdict { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .adj-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600;
+    color: var(--brass); background: var(--brass-dim);
+    border: 1px solid var(--brass-border); border-radius: 6px; padding: 0.3rem 0.7rem;
+  }
+  .adj-route { font-size: 0.76rem; color: var(--text-subtle); }
+  .fairness {
+    display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.7rem; align-items: center;
+    margin-top: 1rem;
+  }
+  .fairness-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-subtle);
+  }
+  .fairness-bar {
+    height: 6px; border-radius: 3px; background: var(--border); overflow: hidden;
+  }
+  .fairness-fill {
+    display: block; height: 100%; width: 0; border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+  .demo-draft:not([hidden]) .fairness-fill { width: 92%; }
+  .fairness-val { grid-column: 2; font-size: 0.76rem; color: var(--text-muted); }
+
   .demo-doc-foot { padding: 0.75rem 1.1rem; border-top: 1px solid var(--border); }
   .sa-stamp {
     display: inline-flex; align-items: center; gap: 0.4rem;
@@ -373,36 +562,38 @@ const isSentinel = p.slug === 'sentinel';
     });
   }
 
-  // --- Sentinel claims-triage demo ---
-  const runBtn = document.getElementById('sentinel-run');
-  if (runBtn) {
-    const steps = Array.from(document.querySelectorAll('#sentinel-steps .demo-step'));
-    const piiEls = Array.from(document.querySelectorAll('.demo-sentinel [data-pii]'));
-    const draft = document.getElementById('sentinel-draft');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // --- Reusable staged-workflow demo (Sentinel, Ledger) ---
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+
+  function runDemo({ runId, stepsSel, scopeSel, highlightSel, draftId, runningLabel }) {
+    const runBtn = document.getElementById(runId);
+    if (!runBtn) return;
+    const steps = Array.from(document.querySelectorAll(`${stepsSel} .demo-step`));
+    const highlights = Array.from(document.querySelectorAll(`${scopeSel} ${highlightSel}`));
+    const draft = document.getElementById(draftId);
+    const idleLabel = runBtn.textContent;
 
     const reset = () => {
       steps.forEach((s) => s.classList.remove('done'));
-      piiEls.forEach((e) => e.classList.remove('tagged'));
+      highlights.forEach((e) => e.classList.remove('tagged'));
       if (draft) draft.hidden = true;
     };
-
-    const wait = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
 
     runBtn.addEventListener('click', async () => {
       reset();
       runBtn.disabled = true;
-      runBtn.textContent = 'Processing…';
+      runBtn.textContent = runningLabel;
 
       await wait(450);
-      steps[0].classList.add('done');           // read
+      steps[0]?.classList.add('done');
       await wait(650);
-      steps[1].classList.add('done');           // pii tagged
-      piiEls.forEach((e, i) => setTimeout(() => e.classList.add('tagged'), reduce ? 0 : i * 160));
+      steps[1]?.classList.add('done');
+      highlights.forEach((e, i) => setTimeout(() => e.classList.add('tagged'), reduce ? 0 : i * 160));
       await wait(900);
-      steps[2].classList.add('done');           // pmb checked
+      steps[2]?.classList.add('done');
       await wait(700);
-      steps[3].classList.add('done');           // drafted
+      steps[3]?.classList.add('done');
       await wait(350);
       if (draft) draft.hidden = false;
 
@@ -410,4 +601,8 @@ const isSentinel = p.slug === 'sentinel';
       runBtn.disabled = false;
     });
   }
+
+  runDemo({ runId: 'sentinel-run', stepsSel: '#sentinel-steps', scopeSel: '.demo-sentinel', highlightSel: '[data-pii]', draftId: 'sentinel-draft', runningLabel: 'Processing…' });
+  runDemo({ runId: 'ledger-run', stepsSel: '#ledger-steps', scopeSel: '.demo-ledger', highlightSel: '[data-sig]', draftId: 'ledger-draft', runningLabel: 'Drafting…' });
+  runDemo({ runId: 'adj-run', stepsSel: '#adj-steps', scopeSel: '.demo-adj', highlightSel: '[data-fac]', draftId: 'adj-draft', runningLabel: 'Assessing…' });
 </script>
