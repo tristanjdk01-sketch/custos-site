@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const products = [
+  {
+    num: '01',
+    name: 'Sentinel',
+    tagline: 'Sovereign claims-document AI for medical schemes',
+    industry: 'Medical Aid',
+    reg: 'POPIA §26 · CMS',
+    problem:
+      'Schemes are buried in claims, pre-authorisations, and PMB disputes. An LLM could read and triage them in seconds, but every document is special personal information: it cannot touch a foreign API or leave SA jurisdiction.',
+    does: [
+      'Reads claims, pre-auths, and member correspondence on infrastructure you control',
+      'Drafts responses and flags PMB and clinical-coding issues for a human to approve',
+      'Keeps every byte of member health data inside SA, with a full audit trail for the CMS',
+    ],
+    for: 'Open and restricted schemes and their administrators handling high claim volumes.',
+  },
+  {
+    num: '02',
+    name: 'Ledger',
+    tagline: 'Sovereign AML and transaction-monitoring copilot',
+    industry: 'Banking',
+    reg: 'SARB Directive 3 · FIC',
+    problem:
+      'AML analysts manually review thousands of flagged transactions. AI could draft the suspicious-transaction narratives, but transaction and KYC data sits under POPIA, FIC, and SARB cloud rules at once. It cannot route through an offshore model.',
+    does: [
+      'Drafts STR and SAR narratives from flagged activity, analyst-in-the-loop',
+      'Summarises customer risk and surfaces the reasoning behind every flag',
+      'Runs entirely on owned or sovereign infrastructure, explainable to a regulator',
+    ],
+    for: 'Retail and business banks running high-volume financial-crime operations.',
+  },
+  {
+    num: '03',
+    name: 'Adjudicator',
+    tagline: 'Sovereign claims and underwriting explainability engine',
+    industry: 'Insurance',
+    reg: 'SAM · FSCA · TCF',
+    problem:
+      'Insurers want AI in claims and underwriting, but SAM, FSCA, and Treating Customers Fairly require every automated decision to be explainable and fair, to a regulator and to a customer. A black-box foreign model cannot satisfy that.',
+    does: [
+      'Produces a plain-language, auditable rationale for every AI-assisted decision',
+      'Tests outcomes for fairness and surfaces where a decision needs human review',
+      'Defensible to the FSCA, on infrastructure that keeps policyholder data sovereign',
+    ],
+    for: 'Life and short-term insurers putting AI into claims or underwriting.',
+  },
+  {
+    num: '04',
+    name: 'Custodian',
+    tagline: 'The POPIA control plane for any AI workload',
+    industry: 'All three',
+    reg: 'POPIA §72 · cross-sector',
+    problem:
+      'Whatever AI you run, you have to prove where personal information went during inference, not just at rest. Almost no one can answer that today. It is the question a regulator or a legal team asks first.',
+    does: [
+      'Sits over any AI workload and maps where personal data moves at every layer',
+      'Produces the data-residency and access audit trail legal and the regulator need',
+      'Turns "is our AI compliant?" into a document you can hand over, not a guess',
+    ],
+    for: 'Any regulated enterprise that needs to evidence AI data sovereignty.',
+  },
+];
+---
+
+<Layout
+  title="Products — Custos"
+  description="Sovereign, POPIA-native AI products in development for SA medical aid, banking, and insurance: Sentinel, Ledger, Adjudicator, and the Custodian control plane. Design partners wanted."
+>
+  <!-- HERO -->
+  <section class="grid-bg">
+    <div class="wrap" style="padding: 5rem 1.5rem 2.5rem;">
+      <p class="label" style="margin: 0 0 1.5rem;"><span class="label-accent">Products</span> <span class="label-sep">/</span> in development</p>
+      <h1 class="h-display" style="max-width: 20ch; font-size: clamp(2rem, 5vw, 3rem);">
+        Sovereign AI products, built for SA regulation.
+      </h1>
+      <p class="lead" style="margin: 1.75rem 0 0; max-width: 56ch;">
+        The global sovereign-AI tools are built for the EU AI Act and HIPAA. None are built for POPIA, SARB, the CMS, or the FSCA. Custos is building the ones that are. Each product below is in active development, and we are taking on a small number of design partners in each industry.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="wrap" style="padding: 1.5rem 1.5rem;">
+    <div class="reveal" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {products.map((p) => (
+        <div class="product-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+              <span class="spec-num" style="font-size: 1.1rem;">{p.num}</span>
+              <div>
+                <h2 style="font-family: var(--heading); font-size: 1.6rem; font-weight: 600; color: #fff; margin: 0; letter-spacing: -0.015em;">{p.name}</h2>
+                <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">{p.tagline}</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+              <span class="chip">{p.reg}</span>
+              <span class="status-badge">In development</span>
+            </div>
+          </div>
+
+          <div class="grid-service">
+            <div>
+              <p class="label" style="margin: 0 0 0.7rem;">The problem</p>
+              <p style="margin: 0 0 1.5rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;">{p.problem}</p>
+              <p class="label" style="margin: 0 0 0.9rem;">What it does</p>
+              <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.6rem;">
+                {p.does.map((item) => (
+                  <li style="display: flex; gap: 0.7rem; font-size: 0.9rem; color: var(--text); line-height: 1.55;">
+                    <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace; flex-shrink: 0;">+</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div>
+                <p class="label" style="margin: 0 0 0.6rem;">Industry</p>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text);">{p.industry}</p>
+              </div>
+              <div>
+                <p class="label" style="margin: 0 0 0.6rem;">Who it's for</p>
+                <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">{p.for}</p>
+              </div>
+              <a href="/contact" class="partner-link">Become a design partner &rarr;</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- DESIGN PARTNER CTA -->
+  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+    <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59,130,246,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem;">
+      <p class="label label-accent" style="margin: 0 0 1rem;">Design partners</p>
+      <h2 class="h-section" style="margin: 0; max-width: 26ch;">Build the product you actually need, with us.</h2>
+      <p style="margin: 1.25rem 0 2rem; font-size: 0.98rem; color: var(--text-muted); max-width: 56ch; line-height: 1.65;">
+        A design partner gets the product shaped around their real workload and regulatory frame, early access as it is built, and pricing that reflects coming in first. We take on a small number per industry. If your team is wrestling with one of these problems now, that is the conversation to have.
+      </p>
+      <a href="/contact" class="btn-cta">Become a design partner</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .product-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-surface);
+    padding: 2.25rem;
+    transition: border-color 0.18s, box-shadow 0.3s;
+  }
+  .product-card:hover {
+    border-color: var(--accent-border-soft);
+    box-shadow: 0 24px 60px -36px rgba(59,130,246,0.4);
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--brass);
+    background: var(--brass-dim);
+    border: 1px solid var(--brass-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    white-space: nowrap;
+  }
+  .status-badge::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brass);
+    box-shadow: 0 0 8px var(--brass);
+  }
+  .partner-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 0.25rem;
+    transition: color 0.15s;
+  }
+  .partner-link:hover { color: var(--accent-hover); }
+</style>
