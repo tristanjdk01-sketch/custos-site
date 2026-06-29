@@ -48,6 +48,29 @@ const isAdjudicator = p.slug === 'adjudicator';
     </section>
   )}
 
+  {isCustodian && (
+    <!-- Code-built abstract hero: the control plane sitting over every sector -->
+    <section class="wrap-narrow" style="padding: 2.5rem 1.5rem 0;">
+      <figure class="cp-hero" aria-label="Custodian sits as a single control plane over AI workloads across medical aid, banking, and insurance.">
+        <div class="cp-plane">
+          <span class="cp-plane-label">Custodian control plane</span>
+          <span class="cp-plane-sub">data-residency &amp; access audit</span>
+        </div>
+        <div class="cp-links" aria-hidden="true">
+          <span class="cp-link cp-link-1"></span>
+          <span class="cp-link cp-link-2"></span>
+          <span class="cp-link cp-link-3"></span>
+        </div>
+        <div class="cp-sectors">
+          <div class="cp-sector"><span class="cp-dot"></span>Medical aid</div>
+          <div class="cp-sector"><span class="cp-dot"></span>Banking</div>
+          <div class="cp-sector"><span class="cp-dot"></span>Insurance</div>
+        </div>
+        <span class="cp-boundary">SA jurisdiction</span>
+      </figure>
+    </section>
+  )}
+
   {isSentinel && (
     <!-- INTERACTIVE CLAIMS-TRIAGE DEMO -->
     <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
@@ -371,6 +394,74 @@ const isAdjudicator = p.slug === 'adjudicator';
     background: linear-gradient(180deg, transparent 60%, rgba(8,11,18,0.35) 100%),
                 radial-gradient(120% 80% at 50% 0%, rgba(59,130,246,0.06), transparent 60%);
     pointer-events: none;
+  }
+
+  /* Custodian: code-built control-plane hero */
+  .cp-hero {
+    margin: 0;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(59,130,246,0.10), transparent 60%),
+      linear-gradient(180deg, var(--bg-surface), var(--bg));
+    box-shadow: 0 30px 70px -40px rgba(0,0,0,0.85);
+    padding: 2.75rem 2rem 2.25rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .cp-plane {
+    width: min(100%, 460px);
+    border: 1px solid var(--accent-border);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(59,130,246,0.14), rgba(59,130,246,0.04));
+    padding: 1rem 1.25rem;
+    text-align: center;
+    box-shadow: 0 0 0 1px rgba(59,130,246,0.10), 0 18px 40px -22px rgba(59,130,246,0.5);
+    position: relative; z-index: 2;
+  }
+  .cp-plane-label { display: block; font-weight: 700; color: #fff; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .cp-plane-sub { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-bright); margin-top: 0.25rem; }
+
+  .cp-links { position: relative; width: min(100%, 460px); height: 46px; }
+  .cp-link {
+    position: absolute; top: 0; width: 2px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    opacity: 0.5;
+  }
+  .cp-link-1 { left: 16.6%; }
+  .cp-link-2 { left: 50%; }
+  .cp-link-3 { left: 83.3%; }
+  /* travelling pulse down each link */
+  .cp-link::after {
+    content: ""; position: absolute; left: -2px; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-bright); box-shadow: 0 0 10px var(--accent);
+    animation: cp-flow 2.6s ease-in-out infinite;
+  }
+  .cp-link-2::after { animation-delay: 0.5s; }
+  .cp-link-3::after { animation-delay: 1.0s; }
+  @keyframes cp-flow { 0% { top: -6px; opacity: 0; } 30% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+  .cp-sectors { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; width: 100%; }
+  .cp-sector {
+    flex: 1 1 0; min-width: 120px; max-width: 170px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg); padding: 0.85rem 0.75rem; text-align: center;
+    font-size: 0.85rem; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .cp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .cp-boundary {
+    margin-top: 1.25rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--brass); letter-spacing: 0.08em;
+    border: 1px dashed var(--brass-border); border-radius: 999px; padding: 0.3rem 0.9rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cp-link::after { animation: none; top: 40%; }
   }
   .status-badge {
     display: inline-flex; align-items: center; gap: 0.4rem;
