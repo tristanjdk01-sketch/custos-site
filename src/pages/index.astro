@@ -49,7 +49,7 @@ const steps = [
   <section class="hero">
     <canvas id="aperture" width="1360" height="1360" aria-hidden="true"></canvas>
     <div class="wrap" style="position: relative; z-index: 2;">
-      <p class="hero-eyebrow"><span style="color: var(--accent);">Sovereign AI</span> &nbsp;//&nbsp; South Africa</p>
+      <p class="hero-eyebrow"><span style="color: var(--accent);">Sovereign AI</span><span class="sep">/</span>South Africa</p>
       <h1 class="hero-h1">Production AI your regulator <span class="serif-em">can't object to.</span></h1>
       <p class="hero-sub">
         South African medical schemes, banks, and insurers are running AI on infrastructure that routes personal data through foreign jurisdictions. Custos designs the architecture that keeps it sovereign, POPIA-compliant, and defensible.
@@ -178,11 +178,12 @@ const steps = [
     z-index: 1;
   }
   .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-muted); margin: 0 0 1.75rem;
     opacity: 0; transform: translateY(12px); animation: rise .7s .1s ease forwards;
   }
+  .hero-eyebrow .sep { color: var(--border); margin: 0 0.55rem; }
   .hero-h1 {
     font-size: clamp(2.3rem, 5.4vw, 3.9rem);
     font-weight: 800; line-height: 1.05; letter-spacing: -0.04em;
