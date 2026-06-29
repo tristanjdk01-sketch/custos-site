@@ -129,15 +129,18 @@ const steps = [
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA (signature: animated guardian aperture returns here) -->
   <section class="wrap reveal" style="padding: 4rem 1.5rem 0;">
-    <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59, 130, 246,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem; text-align: center;">
-      <p class="label label-accent" style="margin: 0 0 1rem;">For CIOs, CROs, and Heads of Data</p>
-      <h2 class="h-section" style="margin: 0 auto; max-width: 24ch;">"Where does our AI data actually live?" If the answer isn't clean, that's the conversation.</h2>
-      <p style="margin: 1.25rem auto 2rem; font-size: 0.95rem; color: var(--text-muted); max-width: 44ch; line-height: 1.65;">
-        25 minutes. No pitch. A working session on your AI workloads and where the regulatory exposure sits.
-      </p>
-      <a href="/contact" class="btn-cta">Start the conversation</a>
+    <div class="cta-panel">
+      <canvas id="aperture" width="1200" height="1200" aria-hidden="true"></canvas>
+      <div class="cta-inner">
+        <p class="label label-accent" style="margin: 0 0 1rem;">For CIOs, CROs, and Heads of Data</p>
+        <h2 class="h-section" style="margin: 0 auto; max-width: 24ch;">"Where does our AI data actually live?" If the answer isn't clean, that's the conversation.</h2>
+        <p style="margin: 1.25rem auto 2rem; font-size: 0.95rem; color: var(--text-muted); max-width: 44ch; line-height: 1.65;">
+          25 minutes. No pitch. A working session on your AI workloads and where the regulatory exposure sits.
+        </p>
+        <a href="/contact" class="btn-cta">Start the conversation</a>
+      </div>
     </div>
   </section>
 </Layout>
@@ -211,6 +214,40 @@ const steps = [
 
   @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
+  /* Closing CTA panel with the signature animated aperture */
+  .cta-panel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--accent-border);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.06), transparent 60%), var(--bg-surface);
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+  .cta-inner { position: relative; z-index: 2; }
+  .cta-panel #aperture {
+    position: absolute;
+    right: -4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 460px;
+    height: 460px;
+    max-width: 52%;
+    opacity: 0.7;
+    z-index: 1;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
+    mask-image: radial-gradient(closest-side, black 60%, transparent 100%);
+  }
+  @media (max-width: 720px) {
+    .cta-panel #aperture {
+      right: 50%; top: 0;
+      transform: translate(50%, -30%);
+      width: 120vw; height: 120vw; max-width: none;
+      opacity: 0.35;
+    }
+  }
+
   /* scroll reveal */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
@@ -238,3 +275,72 @@ const steps = [
     .hero-eyebrow, .hero-h1, .hero-sub, .hero-btns, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 </style>
+
+<script>
+  // Signature animated guardian aperture (now in the closing CTA panel)
+  const cv = document.getElementById('aperture');
+  const panel = document.querySelector('.cta-panel');
+  if (cv && cv.getContext && panel) {
+    const ctx = cv.getContext('2d');
+    const W = cv.width, H = cv.height, cx = W / 2, cy = H / 2;
+    let mx = 0.5, my = 0.5, t = 0;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    panel.addEventListener('mousemove', (e) => {
+      const r = panel.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width;
+      my = (e.clientY - r.top) / r.height;
+    });
+
+    function ring(radius, lw, color, gapStart, gapEnd) {
+      ctx.beginPath();
+      ctx.lineWidth = lw;
+      ctx.strokeStyle = color;
+      ctx.arc(cx, cy, radius, gapEnd, gapStart + Math.PI * 2);
+      ctx.stroke();
+    }
+
+    const rings = [
+      { r: 480, lw: 2, c: 'rgba(59, 130, 246,0.10)', spd: 0.3, gap: 1.1 },
+      { r: 400, lw: 3, c: 'rgba(59, 130, 246,0.22)', spd: -0.5, gap: 1.5 },
+      { r: 320, lw: 4, c: 'rgba(59, 130, 246,0.45)', spd: 0.7, gap: 1.2 },
+      { r: 250, lw: 6, c: 'rgba(59, 130, 246,0.85)', spd: -0.9, gap: 1.7 },
+    ];
+
+    function draw() {
+      t += 0.0045;
+      ctx.clearRect(0, 0, W, H);
+      const ox = (mx - 0.5) * 50, oy = (my - 0.5) * 50;
+      ctx.save();
+      ctx.translate(ox, oy);
+
+      for (const rg of rings) {
+        const a = t * rg.spd;
+        ring(rg.r, rg.lw, rg.c, a, a + rg.gap);
+      }
+
+      const ang = t * -0.9, nodeR = 250;
+      const nx = cx + Math.cos(ang + 0.85) * nodeR;
+      const ny = cy + Math.sin(ang + 0.85) * nodeR;
+
+      const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 120);
+      grad.addColorStop(0, 'rgba(245, 158, 11,' + (0.30 + 0.12 * pulse) + ')');
+      grad.addColorStop(1, 'rgba(245, 158, 11,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(cx, cy, 120, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath(); ctx.arc(cx, cy, 22, 0, Math.PI * 2); ctx.fill();
+
+      ctx.strokeStyle = 'rgba(147, 197, 253,0.22)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
+      ctx.fillStyle = '#93c5fd';
+      ctx.beginPath(); ctx.arc(nx, ny, 6, 0, Math.PI * 2); ctx.fill();
+
+      ctx.restore();
+      if (!reduce) requestAnimationFrame(draw);
+    }
+    draw();
+  }
+</script>
