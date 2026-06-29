@@ -1,68 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const products = [
-  {
-    num: '01',
-    name: 'Sentinel',
-    tagline: 'Sovereign claims-document AI for medical schemes',
-    industry: 'Medical Aid',
-    reg: 'POPIA §26 · CMS',
-    problem:
-      'Schemes are buried in claims, pre-authorisations, and PMB disputes. An LLM could read and triage them in seconds, but every document is special personal information: it cannot touch a foreign API or leave SA jurisdiction.',
-    does: [
-      'Reads claims, pre-auths, and member correspondence on infrastructure you control',
-      'Drafts responses and flags PMB and clinical-coding issues for a human to approve',
-      'Keeps every byte of member health data inside SA, with a full audit trail for the CMS',
-    ],
-    for: 'Open and restricted schemes and their administrators handling high claim volumes.',
-  },
-  {
-    num: '02',
-    name: 'Ledger',
-    tagline: 'Sovereign AML and transaction-monitoring copilot',
-    industry: 'Banking',
-    reg: 'SARB Directive 3 · FIC',
-    problem:
-      'AML analysts manually review thousands of flagged transactions. AI could draft the suspicious-transaction narratives, but transaction and KYC data sits under POPIA, FIC, and SARB cloud rules at once. It cannot route through an offshore model.',
-    does: [
-      'Drafts STR and SAR narratives from flagged activity, analyst-in-the-loop',
-      'Summarises customer risk and surfaces the reasoning behind every flag',
-      'Runs entirely on owned or sovereign infrastructure, explainable to a regulator',
-    ],
-    for: 'Retail and business banks running high-volume financial-crime operations.',
-  },
-  {
-    num: '03',
-    name: 'Adjudicator',
-    tagline: 'Sovereign claims and underwriting explainability engine',
-    industry: 'Insurance',
-    reg: 'SAM · FSCA · TCF',
-    problem:
-      'Insurers want AI in claims and underwriting, but SAM, FSCA, and Treating Customers Fairly require every automated decision to be explainable and fair, to a regulator and to a customer. A black-box foreign model cannot satisfy that.',
-    does: [
-      'Produces a plain-language, auditable rationale for every AI-assisted decision',
-      'Tests outcomes for fairness and surfaces where a decision needs human review',
-      'Defensible to the FSCA, on infrastructure that keeps policyholder data sovereign',
-    ],
-    for: 'Life and short-term insurers putting AI into claims or underwriting.',
-  },
-  {
-    num: '04',
-    name: 'Custodian',
-    tagline: 'The POPIA control plane for any AI workload',
-    industry: 'All three',
-    reg: 'POPIA §72 · cross-sector',
-    problem:
-      'Whatever AI you run, you have to prove where personal information went during inference, not just at rest. Almost no one can answer that today. It is the question a regulator or a legal team asks first.',
-    does: [
-      'Sits over any AI workload and maps where personal data moves at every layer',
-      'Produces the data-residency and access audit trail legal and the regulator need',
-      'Turns "is our AI compliant?" into a document you can hand over, not a guess',
-    ],
-    for: 'Any regulated enterprise that needs to evidence AI data sovereignty.',
-  },
-];
+import { products } from '../data/products';
 ---
 
 <Layout
@@ -91,7 +29,7 @@ const products = [
             <div style="display: flex; align-items: baseline; gap: 1rem;">
               <span class="spec-num" style="font-size: 1.1rem;">{p.num}</span>
               <div>
-                <h2 style="font-family: var(--heading); font-size: 1.6rem; font-weight: 600; color: #fff; margin: 0; letter-spacing: -0.015em;">{p.name}</h2>
+                <h2 style="font-family: var(--heading); font-size: 1.6rem; font-weight: 600; margin: 0; letter-spacing: -0.015em;"><a href={`/products/${p.slug}`} style="color: #fff;">{p.name}</a></h2>
                 <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">{p.tagline}</p>
               </div>
             </div>
@@ -124,7 +62,7 @@ const products = [
                 <p class="label" style="margin: 0 0 0.6rem;">Who it's for</p>
                 <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">{p.for}</p>
               </div>
-              <a href="/contact" class="partner-link">Become a design partner &rarr;</a>
+              <a href={`/products/${p.slug}`} class="partner-link">View details &rarr;</a>
             </div>
           </div>
         </div>

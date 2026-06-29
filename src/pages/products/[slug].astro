@@ -1,0 +1,233 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products, getProduct } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const p = product;
+const isCustodian = p.slug === 'custodian';
+---
+
+<Layout
+  title={`${p.name} — Custos`}
+  description={`${p.tagline}. ${p.detail.summary.slice(0, 110)}`}
+>
+  <article class="wrap-narrow" style="padding: 4rem 1.5rem 0;">
+
+    <a href="/products" style="font-size: 0.85rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 2.5rem;">
+      &larr; All products
+    </a>
+
+    <!-- Header -->
+    <header>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem;">
+        <span class="chip">{p.reg}</span>
+        <span class="status-badge">In development</span>
+      </div>
+      <h1 class="h-display" style="font-size: clamp(2.25rem, 6vw, 3.5rem); margin: 0;">{p.name}</h1>
+      <p class="lead" style="margin: 1.25rem 0 0; max-width: 52ch;">{p.tagline}</p>
+    </header>
+
+    <p style="margin: 2.5rem 0 0; font-size: 1.05rem; color: var(--text); line-height: 1.7; max-width: 64ch;">{p.detail.summary}</p>
+  </article>
+
+  {isCustodian && (
+    <!-- INTERACTIVE DATA-FLOW EXPLORER -->
+    <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+      <div class="rule"><span class="sec-num">[ LIVE ]</span><h2 class="label" style="margin: 0;">Where does personal data actually go?</h2></div>
+      <p style="margin: 0 0 1.75rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; max-width: 60ch;">
+        Click each layer of an AI workload to see what personal information passes through it, and where the sovereignty boundary really sits. This is what Custodian maps, continuously.
+      </p>
+
+      <div class="explorer">
+        <div class="explorer-track" role="list">
+          <button class="layer" data-i="0" role="listitem" aria-pressed="false">
+            <span class="layer-dot"></span><span class="layer-name">Storage</span>
+          </button>
+          <span class="layer-link"></span>
+          <button class="layer" data-i="1" role="listitem" aria-pressed="false">
+            <span class="layer-dot"></span><span class="layer-name">Embeddings</span>
+          </button>
+          <span class="layer-link"></span>
+          <button class="layer" data-i="2" role="listitem" aria-pressed="false">
+            <span class="layer-dot"></span><span class="layer-name">Prompt history</span>
+          </button>
+          <span class="layer-link"></span>
+          <button class="layer boundary" data-i="3" role="listitem" aria-pressed="false">
+            <span class="layer-dot"></span><span class="layer-name">Inference</span>
+          </button>
+        </div>
+
+        <div class="explorer-readout" id="readout" aria-live="polite">
+          <p class="readout-label">Select a layer</p>
+          <p class="readout-body">Most teams have mapped storage and stopped there. Personal information keeps moving long after it leaves the database. Tap a layer above.</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Why it exists -->
+  <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+    <div class="rule"><span class="sec-num">[ WHY ]</span><h2 class="label" style="margin: 0;">Why it exists</h2></div>
+    <p style="margin: 0; font-size: 1rem; color: var(--text-muted); line-height: 1.75; max-width: 64ch;">{p.detail.why}</p>
+  </section>
+
+  <!-- How it works -->
+  <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+    <div class="rule"><span class="sec-num">[ HOW ]</span><h2 class="label" style="margin: 0;">How it works</h2></div>
+    <div class="arch-grid">
+      {p.detail.architecture.map((step, i) => (
+        <div class="arch-step">
+          <span class="spec-num">{String(i + 1).padStart(2, '0')}</span>
+          <h3 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0.5rem 0 0.4rem;">{step.label}</h3>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Regulatory frame + who it's for -->
+  <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+    <div class="grid-about" style="gap: 2.5rem;">
+      <div>
+        <p class="label" style="margin: 0 0 0.9rem;">Regulatory frame</p>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.6rem;">
+          {p.detail.regulatory.map((r) => (
+            <li style="display: flex; gap: 0.7rem; font-size: 0.92rem; color: var(--text); line-height: 1.5;">
+              <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace; flex-shrink: 0;">&sect;</span>
+              <span>{r}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <aside>
+        <div class="card">
+          <p class="label" style="margin: 0 0 0.75rem;">Who it's for</p>
+          <p style="margin: 0 0 1.25rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{p.for}</p>
+          <p class="label" style="margin: 0 0 0.5rem;">Status</p>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--brass); line-height: 1.55;">{p.detail.status}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+    <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59,130,246,0.06), transparent 60%), var(--bg-surface); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+      <div>
+        <h2 class="h-section" style="font-size: 1.5rem; margin: 0 0 0.5rem;">Wrestling with this now?</h2>
+        <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted); max-width: 48ch; line-height: 1.6;">{p.name} is being built with design partners. If this is your problem, help shape it.</p>
+      </div>
+      <a href="/contact" class="btn-cta">Become a design partner</a>
+    </div>
+  </section>
+
+  <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 2.5rem 1.5rem 0; max-width: 760px; margin: 0 auto;">
+    {products.filter((o) => o.slug !== p.slug).map((o) => (
+      <a href={`/products/${o.slug}`} style="font-size: 0.85rem; color: var(--text-muted);">{o.name} &rarr;</a>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+    color: var(--brass); background: var(--brass-dim);
+    border: 1px solid var(--brass-border); border-radius: 999px;
+    padding: 0.25rem 0.65rem; white-space: nowrap;
+  }
+  .status-badge::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brass); box-shadow: 0 0 8px var(--brass);
+  }
+  .arch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .arch-step {
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1.4rem 1.25rem;
+  }
+
+  /* ---- Interactive data-flow explorer ---- */
+  .explorer {
+    border: 1px solid var(--border); border-radius: 14px;
+    background: linear-gradient(180deg, var(--bg-surface), var(--bg));
+    padding: 2rem 1.75rem; box-shadow: 0 24px 60px -34px rgba(0,0,0,0.8);
+  }
+  .explorer-track {
+    display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+    justify-content: space-between; margin-bottom: 1.75rem;
+  }
+  .layer {
+    display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+    background: transparent; border: none; cursor: pointer; padding: 0.25rem;
+    font-family: inherit; color: var(--text-muted); transition: color 0.18s;
+    flex: 0 0 auto;
+  }
+  .layer-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--border);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .layer-name { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+  .layer-link { flex: 1 1 auto; height: 2px; background: var(--border); min-width: 18px; }
+  .layer:hover { color: var(--text); }
+  .layer:hover .layer-dot { border-color: var(--accent); }
+  .layer[aria-pressed="true"] { color: #fff; }
+  .layer[aria-pressed="true"] .layer-dot {
+    border-color: var(--accent); background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .layer.boundary[aria-pressed="true"] .layer-dot {
+    border-color: var(--brass); background: var(--brass);
+    box-shadow: 0 0 0 4px var(--brass-dim);
+  }
+  .explorer-readout {
+    border-top: 1px solid var(--border); padding-top: 1.5rem; min-height: 96px;
+  }
+  .readout-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 0.6rem;
+  }
+  .readout-label.boundary { color: var(--brass); }
+  .readout-body { margin: 0; font-size: 0.95rem; color: var(--text); line-height: 1.65; }
+
+  @media (max-width: 720px) {
+    .arch-grid { grid-template-columns: 1fr 1fr; }
+    .explorer-track { gap: 0.5rem; }
+    .layer-link { display: none; }
+    .layer { flex: 1 1 40%; }
+  }
+  @media (max-width: 480px) {
+    .arch-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const layers = [
+    { label: 'Storage', boundary: false, body: 'Member and customer records sit in a database. This is the layer everyone maps. POPIA residency rules are usually satisfied here, so teams assume the job is done.' },
+    { label: 'Embeddings', boundary: false, body: 'To make data searchable by an AI, it is turned into vectors and stored in a vector database. These embeddings still encode personal information, and they are often hosted somewhere different from the source data.' },
+    { label: 'Prompt history', boundary: false, body: 'Every question and retrieved chunk is assembled into a prompt, and prompts are frequently logged for debugging and evaluation. That log is a fresh copy of personal information, often overlooked entirely.' },
+    { label: 'Inference', boundary: true, body: 'The prompt is sent to the model. If that model runs on a US-controlled provider, personal information has now crossed a jurisdictional boundary, regardless of where the disk sits. This is where residency ends and sovereignty begins.' },
+  ];
+
+  const buttons = Array.from(document.querySelectorAll('.layer'));
+  const readout = document.getElementById('readout');
+  if (buttons.length && readout) {
+    const labelEl = readout.querySelector('.readout-label');
+    const bodyEl = readout.querySelector('.readout-body');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const i = Number(btn.getAttribute('data-i'));
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        const layer = layers[i];
+        labelEl.textContent = layer.boundary ? 'Sovereignty boundary' : layer.label;
+        labelEl.classList.toggle('boundary', layer.boundary);
+        bodyEl.textContent = layer.body;
+      });
+    });
+  }
+</script>
