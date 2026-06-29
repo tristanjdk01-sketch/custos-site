@@ -37,6 +37,17 @@ const isAdjudicator = p.slug === 'adjudicator';
     <p style="margin: 2.5rem 0 0; font-size: 1.05rem; color: var(--text); line-height: 1.7; max-width: 64ch;">{p.detail.summary}</p>
   </article>
 
+  {p.heroImage && (
+    <section class="wrap-narrow" style="padding: 2.5rem 1.5rem 0;">
+      <figure class="product-hero">
+        <picture>
+          <source srcset={`/${p.heroImage}.webp`} type="image/webp" />
+          <img src={`/${p.heroImage}.jpg`} alt={p.heroAlt ?? ''} loading="lazy" decoding="async" />
+        </picture>
+      </figure>
+    </section>
+  )}
+
   {isSentinel && (
     <!-- INTERACTIVE CLAIMS-TRIAGE DEMO -->
     <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
@@ -338,6 +349,29 @@ const isAdjudicator = p.slug === 'adjudicator';
 </Layout>
 
 <style>
+  .product-hero {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 70px -40px rgba(0,0,0,0.85);
+    position: relative;
+  }
+  .product-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 8.2;
+    object-fit: cover;
+  }
+  /* faint cool wash to tie the warm photo to the brand palette */
+  .product-hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(8,11,18,0.35) 100%),
+                radial-gradient(120% 80% at 50% 0%, rgba(59,130,246,0.06), transparent 60%);
+    pointer-events: none;
+  }
   .status-badge {
     display: inline-flex; align-items: center; gap: 0.4rem;
     font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;

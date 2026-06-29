@@ -11,6 +11,10 @@ export interface Product {
   problem: string;
   does: string[];
   for: string;
+  /** Optional hero image basename in /public (without extension), e.g. 'ledger-banking'. Serves .webp + .jpg. */
+  heroImage?: string;
+  /** Alt text for the hero image */
+  heroAlt?: string;
   /** Longer detail-page content */
   detail: {
     summary: string;
@@ -59,6 +63,8 @@ export const products: Product[] = [
     tagline: 'Sovereign AML and transaction-monitoring copilot',
     industry: 'Banking',
     reg: 'SARB Directive 3 · FIC',
+    heroImage: 'ledger-banking',
+    heroAlt: 'A South African financial-crime team reviewing transaction-monitoring dashboards in a Johannesburg bank office at dusk',
     problem:
       'AML analysts manually review thousands of flagged transactions. AI could draft the suspicious-transaction narratives, but transaction and KYC data sits under POPIA, FIC, and SARB cloud rules at once. It cannot route through an offshore model.',
     does: [
