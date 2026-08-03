@@ -64,8 +64,9 @@ const services = [
     </div>
   </section>
 
-  <!-- ENGAGEMENT PATH (animated, draws on scroll) -->
-  <section class="wrap reveal" style="padding: 1rem 1.5rem 0;">
+  <!-- CREAM BAND: engagement path + services -->
+  <section class="section-light">
+  <section class="wrap reveal" style="padding: 4rem 1.5rem 0;">
     <div class="path-card">
       <svg class="path-svg" viewBox="0 0 900 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Three engagements that build on each other: Readiness Assessment, Sovereign Reference Architecture, then Build and Integrate.">
         <line class="path-track" x1="90" y1="60" x2="810" y2="60" />
@@ -90,14 +91,14 @@ const services = [
   </section>
 
   <!-- SERVICES -->
-  <section class="wrap" style="padding: 2rem 1.5rem;">
+  <section class="wrap" style="padding: 2rem 1.5rem 4rem;">
     <div class="reveal" style="display: flex; flex-direction: column; gap: 1.5rem;">
       {services.map((s) => (
-        <div style="border: 1px solid var(--border); border-radius: 12px; background: var(--bg-surface); padding: 2.25rem; transition: border-color 0.18s;">
+        <div class="service-card">
           <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
               <span class="spec-num" style="font-size: 1.1rem;">{s.num}</span>
-              <h2 style="font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0; letter-spacing: -0.025em;">{s.name}</h2>
+              <h2 style="font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.025em;">{s.name}</h2>
             </div>
             <span class="chip">{s.duration}</span>
           </div>
@@ -131,9 +132,11 @@ const services = [
       ))}
     </div>
   </section>
+  </section>
+  <!-- /CREAM BAND -->
 
   <!-- CTA -->
-  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+  <section class="wrap" style="padding: 4rem 1.5rem 0;">
     <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59, 130, 246,0.06), transparent 60%), var(--bg-surface); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
       <div>
         <h2 class="h-section" style="font-size: 1.5rem; margin: 0 0 0.5rem;">Not sure which one you need?</h2>
@@ -148,10 +151,21 @@ const services = [
   .path-card {
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: linear-gradient(180deg, var(--bg-surface), var(--bg));
+    background: var(--bg-surface);
     padding: 1.5rem 1.25rem 1rem;
-    box-shadow: 0 24px 60px -34px rgba(0,0,0,0.8);
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 18px 44px -24px rgba(16,24,40,0.22);
   }
+  /* service card on the cream band */
+  .service-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-surface);
+    padding: 2.25rem;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 14px 34px -20px rgba(16,24,40,0.18);
+    transition: border-color 0.18s, box-shadow 0.3s;
+  }
+  .service-card:hover { border-color: rgba(37,99,235,0.35); box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 22px 48px -22px rgba(37,99,235,0.25); }
+  .service-card h2 { color: var(--l-ink); }
   .path-svg { width: 100%; height: auto; display: block; overflow: visible; }
   .path-track { stroke: var(--border); stroke-width: 2; }
   .path-draw {

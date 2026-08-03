@@ -20,8 +20,9 @@ import { products } from '../data/products';
     </div>
   </section>
 
-  <!-- PRODUCTS -->
-  <section class="wrap" style="padding: 1.5rem 1.5rem;">
+  <!-- CREAM BAND: products -->
+  <section class="section-light">
+  <section class="wrap" style="padding: 4rem 1.5rem 4rem;">
     <div class="reveal" style="display: flex; flex-direction: column; gap: 1.5rem;">
       {products.map((p) => (
         <div class="product-card">
@@ -29,7 +30,7 @@ import { products } from '../data/products';
             <div style="display: flex; align-items: baseline; gap: 1rem;">
               <span class="spec-num" style="font-size: 1.1rem;">{p.num}</span>
               <div>
-                <h2 style="font-family: var(--heading); font-size: 1.6rem; font-weight: 600; margin: 0; letter-spacing: -0.015em;"><a href={`/products/${p.slug}`} style="color: #fff;">{p.name}</a></h2>
+                <h2 style="font-family: var(--heading); font-size: 1.6rem; font-weight: 600; margin: 0; letter-spacing: -0.015em;"><a href={`/products/${p.slug}`} class="product-name-link">{p.name}</a></h2>
                 <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">{p.tagline}</p>
               </div>
             </div>
@@ -69,9 +70,11 @@ import { products } from '../data/products';
       ))}
     </div>
   </section>
+  </section>
+  <!-- /CREAM BAND -->
 
   <!-- DESIGN PARTNER CTA -->
-  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+  <section class="wrap" style="padding: 4rem 1.5rem 0;">
     <div style="border: 1px solid var(--accent-border); border-radius: 12px; background: linear-gradient(135deg, rgba(59,130,246,0.06), transparent 60%), var(--bg-surface); padding: 3rem 2.5rem;">
       <p class="label label-accent" style="margin: 0 0 1rem;">Design partners</p>
       <h2 class="h-section" style="margin: 0; max-width: 26ch;">Build the product you actually need, with us.</h2>
@@ -89,12 +92,15 @@ import { products } from '../data/products';
     border-radius: 12px;
     background: var(--bg-surface);
     padding: 2.25rem;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 14px 34px -20px rgba(16,24,40,0.16);
     transition: border-color 0.18s, box-shadow 0.3s;
   }
   .product-card:hover {
-    border-color: var(--accent-border-soft);
-    box-shadow: 0 24px 60px -36px rgba(59,130,246,0.4);
+    border-color: rgba(37,99,235,0.35);
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 22px 48px -22px rgba(37,99,235,0.22);
   }
+  .product-name-link { color: var(--l-ink); }
+  .product-name-link:hover { color: var(--l-blue); }
   .status-badge {
     display: inline-flex;
     align-items: center;

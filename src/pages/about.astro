@@ -52,7 +52,8 @@ const principles = [
     </div>
   </section>
 
-  <section class="wrap" style="padding: 2rem 1.5rem;">
+  <section class="section-light">
+  <section class="wrap" style="padding: 4.5rem 1.5rem 2rem;">
     <div class="grid-about">
 
       <!-- Narrative -->
@@ -102,7 +103,7 @@ const principles = [
   </section>
 
   <!-- PRINCIPLES -->
-  <section class="wrap" style="padding: 3rem 1.5rem 0;">
+  <section class="wrap" style="padding: 3rem 1.5rem 5rem;">
     <div class="rule">
       <span class="sec-num">[ HOW ]</span>
       <h2 class="label" style="margin: 0;">Operating principles</h2>
@@ -110,12 +111,14 @@ const principles = [
     <div class="grid-3 stagger reveal">
       {principles.map((p) => (
         <div class="card">
-          <h3 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{p.title}</h3>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{p.title}</h3>
           <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{p.body}</p>
         </div>
       ))}
     </div>
   </section>
+  </section>
+  <!-- /CREAM BAND -->
 </Layout>
 
 <style>

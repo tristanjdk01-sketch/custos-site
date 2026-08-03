@@ -111,6 +111,12 @@
   border: 1px solid var(--l-line);
   box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 18px 44px -22px rgba(16,24,40,0.22);
 }
+/* prose inside a cream band: dark headings/strong, deeper-blue links */
+.section-light .prose, .section-light-alt .prose { color: var(--l-ink); }
+.section-light .prose h1, .section-light .prose h2, .section-light .prose h3, .section-light .prose h4,
+.section-light-alt .prose h1, .section-light-alt .prose h2, .section-light-alt .prose h3, .section-light-alt .prose h4 { color: var(--l-ink); }
+.section-light .prose strong, .section-light-alt .prose strong { color: var(--l-ink); }
+.section-light .prose a, .section-light-alt .prose a { color: var(--l-blue); }
 
 /* Serif accent line (gravitas) */
 .serif { font-family: var(--serif); font-weight: 600; }
