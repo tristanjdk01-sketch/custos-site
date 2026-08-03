@@ -6,19 +6,19 @@ const verticals = [
     num: '01',
     name: 'Medical Aid',
     reg: 'POPIA S26 · CMS',
-    line: 'Member health data is special personal information. Every LLM pilot touches it during inference, not just storage.',
+    line: 'Member health data is the most protected data there is. Every AI pilot touches it, not just at rest, but the second a model runs.',
   },
   {
     num: '02',
     name: 'Banking',
     reg: 'SARB Directive 3 · FIC',
-    line: 'AML and credit-decision AI sits across POPIA, FIC, and SARB cloud rules at once. The architecture has to satisfy all three.',
+    line: 'AML and credit AI answer to POPIA, FIC, and SARB at once. One architecture has to satisfy all three.',
   },
   {
     num: '03',
     name: 'Insurance',
     reg: 'SAM · FSCA · TCF',
-    line: 'Underwriting and claims AI must be explainable to a regulator and fair to a customer. That is an architecture problem before it is a model problem.',
+    line: 'Every automated decision has to be fair, and explainable to a regulator. That is architecture, not just a model.',
   },
 ];
 
@@ -26,17 +26,17 @@ const steps = [
   {
     num: '01',
     title: 'Map the data flow',
-    body: 'Classify every point personal information moves through an AI workload: storage, embeddings, prompt history, inference state. Most teams have mapped storage and nothing else.',
+    body: 'Storage, embeddings, prompt history, inference. Personal data moves through all four. Most teams have mapped the first and missed the rest.',
   },
   {
     num: '02',
     title: 'Find the regulatory boundary',
-    body: 'Mark where POPIA Section 72, Section 26, SARB Directive 3, or SAM obligations are triggered. This is the line your architecture has to defend.',
+    body: 'Where does POPIA get triggered. SARB. SAM. This is the line your architecture has to defend.',
   },
   {
     num: '03',
     title: 'Design the sovereign path',
-    body: 'Choose the deployment that holds: on-prem GPU, Cassava AI Factory, or hybrid retrieval with controlled generation. Documented so legal and the regulator can read it.',
+    body: 'On-prem, Cassava AI Factory, or hybrid. We pick the one that holds, and document it so legal and the regulator can follow.',
   },
 ];
 ---
@@ -56,7 +56,7 @@ const steps = [
       <p class="hero-eyebrow"><span style="color: var(--accent);">Sovereign AI</span><span class="sep">/</span>South Africa</p>
       <h1 class="hero-h1">Production AI your regulator <span class="serif-em">can't object to.</span></h1>
       <p class="hero-sub">
-        South African medical schemes, banks, and insurers are running AI on infrastructure that routes personal data through foreign jurisdictions. Custos designs the architecture that keeps it sovereign, POPIA-compliant, and defensible.
+        SA schemes, banks, and insurers are running AI on foreign infrastructure. Their data leaves the country every time a model runs. We design the architecture that keeps it here, and keeps it defensible.
       </p>
       <div class="hero-btns">
         <a href="/services" class="btn-primary" data-magnetic>See the services</a>
@@ -77,7 +77,7 @@ const steps = [
         <div class="flow-node boundary">US-controlled provider</div>
       </div>
       <p style="margin: 1.25rem 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-        Data residency keeps the bytes in SA. It does not put them beyond the reach of foreign law. Sovereignty is who can compel access, not where the disk sits.
+        Residency keeps the bytes in SA. It does not put them beyond foreign law. Sovereignty is about who can compel access, not where the disk sits.
       </p>
     </div>
   </section>
@@ -112,7 +112,7 @@ const steps = [
       <div>
         <h2 class="h-section" style="max-width: 14ch;">Compliance is an architecture decision, not a policy document.</h2>
         <p style="margin: 1.5rem 0 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 42ch;">
-          Most "AI governance" stops at a written policy. The exposure lives in the data flow: where personal information actually moves when a model runs. Custos works at that layer.
+          Most AI governance stops at a written policy. The real exposure is in the data flow, where personal data actually moves when a model runs. That is the layer we work at.
         </p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 0;">
