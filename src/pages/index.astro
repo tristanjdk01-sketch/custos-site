@@ -65,66 +65,69 @@ const steps = [
     </div>
   </section>
 
-  <!-- residency vs sovereignty diagram (own section, scroll-revealed) -->
-  <section class="wrap reveal" style="padding: 1rem 1.5rem 2rem;">
-    <div style="border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, var(--bg-surface), var(--bg)); padding: 2rem 2rem; max-width: 760px; box-shadow: 0 24px 60px -30px rgba(0,0,0,0.8);">
-      <p class="card-title" style="margin: 0 0 1.25rem;">The distinction most pilots miss</p>
-      <div class="flow-row" style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-        <div class="flow-node">Member data</div>
-        <span class="flow-arrow">&rarr;</span>
-        <div class="flow-node">Azure ZA-North</div>
-        <span class="flow-arrow">&rarr;</span>
-        <div class="flow-node boundary">US-controlled provider</div>
-      </div>
-      <p style="margin: 1.25rem 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-        Residency keeps the bytes in SA. It does not put them beyond foreign law. Sovereignty is about who can compel access, not where the disk sits.
-      </p>
-    </div>
-  </section>
-
-  <!-- VERTICALS -->
-  <section class="wrap reveal" style="padding: 4rem 1.5rem;">
-    <div class="rule">
-      <span class="sec-num">[ WHO ]</span>
-      <h2 class="label" style="margin: 0;">Three regulated industries</h2>
-    </div>
-    <div class="grid-3 stagger reveal">
-      {verticals.map((v) => (
-        <div class="card">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-            <span class="spec-num">{v.num}</span>
-            <span class="chip">{v.reg}</span>
-          </div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{v.name}</h3>
-          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{v.line}</p>
+  <!-- LIGHT BAND: residency diagram + verticals -->
+  <section class="section-light">
+    <div class="wrap reveal" style="padding: 4.5rem 1.5rem 2rem;">
+      <div class="lightcard" style="border-radius: 12px; padding: 2rem; max-width: 760px;">
+        <p class="card-title" style="margin: 0 0 1.25rem;">The distinction most pilots miss</p>
+        <div class="flow-row" style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <div class="flow-node">Member data</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-node">Azure ZA-North</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-node boundary">US-controlled provider</div>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="wrap reveal" style="padding: 4rem 1.5rem;">
-    <div class="rule">
-      <span class="sec-num">[ HOW ]</span>
-      <span class="label">The method</span>
-    </div>
-    <div class="grid-method">
-      <div>
-        <h2 class="h-section" style="max-width: 14ch;">Compliance is an architecture decision, not a policy document.</h2>
-        <p style="margin: 1.5rem 0 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 42ch;">
-          Most AI governance stops at a written policy. The real exposure is in the data flow, where personal data actually moves when a model runs. That is the layer we work at.
+        <p style="margin: 1.25rem 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+          Residency keeps the bytes in SA. It does not put them beyond foreign law. Sovereignty is about who can compel access, not where the disk sits.
         </p>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0;">
-        {steps.map((s, i) => (
-          <div style={`display: flex; gap: 1.25rem; padding: 1.5rem 0; ${i > 0 ? 'border-top: 1px solid var(--border);' : ''}`}>
-            <span class="spec-num" style="flex-shrink: 0;">{s.num}</span>
-            <div>
-              <h3 style="font-size: 1rem; font-weight: 600; color: #fff; margin: 0 0 0.4rem;">{s.title}</h3>
-              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{s.body}</p>
+    </div>
+
+    <div class="wrap reveal" style="padding: 2.5rem 1.5rem 4.5rem;">
+      <div class="rule">
+        <span class="sec-num">[ WHO ]</span>
+        <h2 class="label" style="margin: 0;">Three regulated industries</h2>
+      </div>
+      <div class="grid-3 stagger reveal">
+        {verticals.map((v) => (
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+              <span class="spec-num">{v.num}</span>
+              <span class="chip">{v.reg}</span>
             </div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0 0 0.65rem; letter-spacing: -0.02em;">{v.name}</h3>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{v.line}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHT-ALT BAND: method -->
+  <section class="section-light-alt">
+    <div class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+      <div class="rule">
+        <span class="sec-num">[ HOW ]</span>
+        <span class="label">The method</span>
+      </div>
+      <div class="grid-method">
+        <div>
+          <h2 class="h-section" style="max-width: 14ch;">Compliance is an architecture decision, not a policy document.</h2>
+          <p style="margin: 1.5rem 0 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 42ch;">
+            Most AI governance stops at a written policy. The real exposure is in the data flow, where personal data actually moves when a model runs. That is the layer we work at.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          {steps.map((s, i) => (
+            <div style={`display: flex; gap: 1.25rem; padding: 1.5rem 0; ${i > 0 ? 'border-top: 1px solid var(--border);' : ''}`}>
+              <span class="spec-num" style="flex-shrink: 0;">{s.num}</span>
+              <div>
+                <h3 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.4rem;">{s.title}</h3>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">{s.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>

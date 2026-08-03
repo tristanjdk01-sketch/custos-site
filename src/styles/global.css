@@ -3,25 +3,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Blue-black base, authority-blue primary, amber accent. Sovereign / institutional. */
-  --bg: #080b12;
-  --bg-surface: #0f131c;
-  --bg-elevated: #161b26;
-  --border: #1a2030;
-  --text: #e7ebf2;
-  --text-muted: #8b94a6;
-  --text-subtle: #7e889c;
+  /* Deep sovereign navy base (editorial multi-wash), authority blue, logo amber/gold. */
+  --bg: #0e1b3a;            /* deep navy, not cold blue-black */
+  --bg-surface: #142445;    /* raised navy surface */
+  --bg-elevated: #1b2e54;
+  --border: #24365e;        /* navy border */
+  --text: #e9edf6;
+  --text-muted: #aeb9d0;
+  --text-subtle: #8b98b8;
 
   /* Authority blue = primary workhorse */
   --accent: #3b82f6;
   --accent-bright: #93c5fd;
-  --accent-dim: rgba(59, 130, 246, 0.10);
+  --accent-dim: rgba(59, 130, 246, 0.12);
   --accent-hover: #60a5fa;
 
-  /* Amber = sparing accent / seal of trust */
-  --brass: #f59e0b;
-  --brass-dim: rgba(245, 158, 11, 0.10);
-  --brass-border: rgba(245, 158, 11, 0.40);
+  /* Amber/gold = the logo colour, now a real co-lead */
+  --brass: #f59e0b;             /* true logo amber — buttons, markers, chips */
+  --brass-bright: #fbbf24;      /* brighter amber for large headline text on navy */
+  --brass-dim: rgba(245, 158, 11, 0.12);
+  --brass-border: rgba(245, 158, 11, 0.45);
 
   --serif: 'Fraunces', Georgia, serif;
   /* Headings use the serif for editorial / regulated-industry gravitas; body stays Inter */
@@ -29,6 +30,86 @@
 
   --accent-border: rgba(59, 130, 246, 0.32);
   --accent-border-soft: rgba(59, 130, 246, 0.16);
+
+  /* Cream editorial band (warm, not cold grey). Used inside .section-light. */
+  --l-paper: #f4efe6;       /* warm cream */
+  --l-paper-alt: #efe8db;   /* slightly deeper cream for alt bands */
+  --l-ink: #141414;         /* warm near-black ink on cream */
+  --l-ink-muted: #5a5348;   /* warm muted */
+  --l-ink-subtle: #857b6b;
+  --l-line: #e7ddcb;        /* warm hairline */
+  --l-surface: #ffffff;
+  --l-blue: #2455c0;        /* deeper blue reads on cream */
+  --l-amber-ink: #9a6207;   /* amber text that passes contrast on cream */
+  --l-amber-bg: #fbeed0;
+  --l-amber-border: #f0d99a;
+  /* tinted cards for the editorial band */
+  --l-card-1: #ffffff;      --l-card-1-bd: #e7ddcb;   /* warm white */
+  --l-card-2: #eef3ff;      --l-card-2-bd: #d3e0f7;   /* soft blue */
+  --l-card-3: #fff7e6;      --l-card-3-bd: #f2e2b8;   /* soft amber */
+}
+
+/* ============================================================
+   TWO-TONE SECTIONS
+   Wrap a section in .section-light / .section-light-alt to flip
+   it to the light palette. Dark stays the default everywhere else.
+   ============================================================ */
+.section-light { background: var(--l-paper); color: var(--l-ink); }
+.section-light-alt { background: var(--l-paper-alt); color: var(--l-ink); }
+
+/* Text + element remaps inside light sections */
+.section-light, .section-light-alt {
+  --text: var(--l-ink);
+  --text-muted: var(--l-ink-muted);
+  --text-subtle: var(--l-ink-subtle);
+  --border: var(--l-line);
+  --bg: var(--l-paper);
+  --bg-surface: var(--l-surface);
+  --accent: var(--l-blue);
+}
+.section-light h1, .section-light h2, .section-light h3,
+.section-light-alt h1, .section-light-alt h2, .section-light-alt h3 { color: var(--l-ink); }
+.section-light .h-section, .section-light-alt .h-section,
+.section-light .h-display, .section-light-alt .h-display { color: var(--l-ink); }
+.section-light .card, .section-light-alt .card {
+  background: var(--l-surface);
+  border: 1px solid var(--l-line);
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 12px 30px -18px rgba(16,24,40,0.18);
+}
+.section-light .card:hover, .section-light-alt .card:hover {
+  border-color: rgba(37,99,235,0.35);
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 20px 44px -20px rgba(37,99,235,0.28);
+}
+/* Editorial tinted cards: in a .grid-3 on a cream band, each card gets its own tint */
+.section-light .grid-3 .card:nth-child(1), .section-light-alt .grid-3 .card:nth-child(1) { background: var(--l-card-1); border-color: var(--l-card-1-bd); }
+.section-light .grid-3 .card:nth-child(2), .section-light-alt .grid-3 .card:nth-child(2) { background: var(--l-card-2); border-color: var(--l-card-2-bd); }
+.section-light .grid-3 .card:nth-child(3), .section-light-alt .grid-3 .card:nth-child(3) { background: var(--l-card-3); border-color: var(--l-card-3-bd); }
+.section-light .card h3, .section-light-alt .card h3 { color: var(--l-ink); }
+.section-light .spec-num, .section-light-alt .spec-num { color: var(--l-blue); }
+.section-light .sec-num, .section-light-alt .sec-num { color: var(--l-amber-ink); }
+.section-light .label, .section-light-alt .label { color: var(--l-ink-muted); }
+.section-light .card-title, .section-light-alt .card-title { color: var(--l-ink); }
+/* chips on light */
+.section-light .chip, .section-light-alt .chip {
+  color: var(--l-amber-ink); background: var(--l-amber-bg); border: 1px solid var(--l-amber-border);
+}
+/* flow diagram nodes on light */
+.section-light .flow-node, .section-light-alt .flow-node {
+  background: var(--l-surface); border: 1px solid var(--l-line); color: var(--l-ink);
+}
+.section-light .flow-node.boundary, .section-light-alt .flow-node.boundary {
+  border-color: rgba(37,99,235,0.4); color: var(--l-blue);
+}
+.section-light .flow-arrow, .section-light-alt .flow-arrow { color: var(--l-ink-subtle); }
+.section-light .rule::after, .section-light-alt .rule::after { background: var(--l-line); }
+/* CTA button stays solid + readable on light */
+.section-light .btn-cta, .section-light-alt .btn-cta { color: #fff; background: var(--l-blue); }
+.section-light .btn-cta:hover, .section-light-alt .btn-cta:hover { background: #1d4ed8; color: #fff; }
+/* white feature card on a light band */
+.section-light .lightcard, .section-light-alt .lightcard {
+  background: var(--l-surface);
+  border: 1px solid var(--l-line);
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 18px 44px -22px rgba(16,24,40,0.22);
 }
 
 /* Serif accent line (gravitas) */
@@ -40,7 +121,7 @@
   font-style: italic;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: var(--accent-bright);
+  color: var(--brass-bright); /* headline emphasis in the brighter logo gold */
 }
 
 /* ---- Elevation system (modern-web-design skill) ---- */
