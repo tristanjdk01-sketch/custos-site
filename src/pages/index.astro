@@ -132,8 +132,67 @@ const steps = [
     </div>
   </section>
 
+  <!-- STATS / PROOF ROW (navy band) -->
+  <section class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+    <div class="rule">
+      <span class="sec-num">[ WHY ]</span>
+      <span class="label">The shape of the problem</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">points personal data moves through an AI workload. Most teams have mapped one.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">regulators a single banking AI answers to at once: POPIA, FIC, SARB.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">§72</span>
+        <span class="stat-label">the POPIA section a default cloud AI call triggers, usually without anyone deciding to.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2025</span>
+        <span class="stat-label">Cassava AI Factory brought sovereign GPU compute to SA at scale. The excuse is gone.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOW (cream band, timeline) -->
+  <section class="section-light">
+    <div class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+      <div class="grid-method">
+        <div>
+          <span class="sec-num">[ CONTEXT ]</span>
+          <h2 class="h-section" style="margin: 0.75rem 0 0; max-width: 16ch;">Sovereign AI stopped being optional this year.</h2>
+          <p style="margin: 1.5rem 0 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 42ch;">
+            The question used to be whether sovereign AI was even possible in South Africa. That question is settled. Now it is a deployment decision, and a compliance one.
+          </p>
+        </div>
+        <ol class="timeline">
+          <li>
+            <span class="tl-date">Jul 2021</span>
+            <div><h3 class="tl-title">POPIA takes full effect</h3><p class="tl-body">Cross-border transfer of personal information (Section 72) becomes enforceable. Most AI calls are cross-border transfers.</p></div>
+          </li>
+          <li>
+            <span class="tl-date">2023-24</span>
+            <div><h3 class="tl-title">Enterprises pilot AI on foreign infra</h3><p class="tl-body">Schemes, banks, and insurers ship LLM pilots on default cloud endpoints. The compliance work rarely happens.</p></div>
+          </li>
+          <li>
+            <span class="tl-date">Oct 2025</span>
+            <div><h3 class="tl-title">Cassava AI Factory goes live</h3><p class="tl-body">Sovereign GPU compute at scale, on SA soil, under SA law. The infrastructure excuse disappears.</p></div>
+          </li>
+          <li>
+            <span class="tl-date">Now</span>
+            <div><h3 class="tl-title">The deployment decision</h3><p class="tl-body">On-prem, sovereign cloud, or hybrid. The right answer is an architecture question, and that is the work.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA (signature: animated guardian aperture returns here) -->
-  <section class="wrap reveal" style="padding: 4rem 1.5rem 0;">
+  <section class="wrap reveal" style="padding: 4.5rem 1.5rem 0;">
     <div class="cta-panel">
       <canvas id="aperture" width="1200" height="1200" aria-hidden="true"></canvas>
       <div class="cta-inner">
@@ -249,6 +308,44 @@ const steps = [
       width: 120vw; height: 120vw; max-width: none;
       opacity: 0.35;
     }
+  }
+
+  /* Stats / proof row */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  }
+  .stat {
+    border: 1px solid var(--border); border-radius: 12px;
+    background: linear-gradient(180deg, var(--bg-surface), transparent);
+    padding: 1.75rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.85rem;
+  }
+  .stat-num {
+    font-family: var(--heading); font-weight: 600;
+    font-size: 2.75rem; line-height: 1; letter-spacing: -0.03em;
+    color: var(--brass-bright);
+  }
+  .stat-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* Context timeline (cream band) */
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline li {
+    display: grid; grid-template-columns: 5.5rem 1fr; gap: 1.25rem;
+    padding: 1.25rem 0; border-top: 1px solid var(--border);
+  }
+  .timeline li:first-child { border-top: none; }
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    color: var(--brass); font-weight: 500; padding-top: 0.15rem;
+  }
+  .tl-title { font-size: 1rem; font-weight: 700; margin: 0 0 0.3rem; letter-spacing: -0.01em; }
+  .tl-body { margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  @media (max-width: 860px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .stat-row { grid-template-columns: 1fr; }
   }
 
   /* scroll reveal */
