@@ -15,6 +15,19 @@ export interface Product {
   heroImage?: string;
   /** Alt text for the hero image */
   heroAlt?: string;
+  /** Optional NPU-style spec panel: tech stack + capabilities + a live-query demo */
+  spec?: {
+    builtOn: string[];
+    capabilities: string[];
+    /** the fake-but-believable "live query" demo */
+    demo: {
+      queryLabel: string;      // e.g. "LIVE AUDIT QUERY"
+      query: string;           // the code-style query text
+      status: string;          // e.g. "Sovereign · in SA"
+      results: { tag: string; tagKind: 'a' | 'b' | 'c'; meta: string; body: string }[];
+      footerLabel: string;     // e.g. "MAPPED ACROSS EVERY WORKLOAD"
+    };
+  };
   /** Longer detail-page content */
   detail: {
     summary: string;
@@ -137,6 +150,28 @@ export const products: Product[] = [
       'Turns "is our AI compliant?" into a document you can hand over, not a guess',
     ],
     for: 'Any regulated enterprise that needs to evidence AI data sovereignty.',
+    spec: {
+      builtOn: ['vLLM', 'Qdrant', 'Keycloak', 'PostgreSQL', 'OpenTelemetry', 'Cassava AI Factory'],
+      capabilities: [
+        'Data-flow mapping',
+        'Access + identity audit',
+        'Residency boundary checks',
+        'Inference-state tracing',
+        'Continuous monitoring',
+        'Regulator-ready evidence',
+      ],
+      demo: {
+        queryLabel: 'Live audit query',
+        query: 'custodian.trace("where did claim PA-20418 go?")',
+        status: 'Sovereign · in SA',
+        results: [
+          { tag: 'STORAGE', tagKind: 'a', meta: 'db.claims · eu-west → za', body: 'Record read from the sovereign claims store. In-jurisdiction.' },
+          { tag: 'EMBEDDING', tagKind: 'b', meta: 'qdrant · za-node-1', body: 'Vectorised locally. Embedding never left South Africa.' },
+          { tag: 'INFERENCE', tagKind: 'c', meta: 'vLLM · on-prem GPU', body: 'Prompt + context resolved on owned hardware. No cross-border transfer.' },
+        ],
+        footerLabel: 'Mapped across every workload',
+      },
+    },
     detail: {
       summary:
         'Custodian is the control plane that sits over any AI workload and answers the one question every regulator asks first: where did the personal information actually go? It maps data movement through storage, embeddings, prompt history, and inference state, and produces the residency and access audit trail legal and the regulator need.',
