@@ -121,7 +121,9 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body style="background: var(--bg);">
-    <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(11,14,13,0.82);">
+    <!-- Site-wide circuit-connector print: fixed behind all content, shows through every navy area -->
+    <div class="site-decal" aria-hidden="true"></div>
+    <header style="border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); background: rgba(14,27,58,0.82);">
       <div class="wrap nav-grid" style="height: 60px;">
         <a href="/" class="nav-brand" style="color: #fff; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;">
           <img src="/logo-mark.svg" width="28" height="28" alt="" style="flex-shrink: 0; display: block;" />

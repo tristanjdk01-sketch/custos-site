@@ -50,6 +50,33 @@
 }
 
 /* ============================================================
+   SITE-WIDE BLUEPRINT DECAL
+   A fixed layer behind all content. Shows through every navy area on
+   every page; opaque cream (.section-light) sections cover it naturally.
+   ============================================================ */
+.site-decal {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* faint grid */
+  background-image:
+    linear-gradient(rgba(147,197,253,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147,197,253,0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.site-decal::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-repeat: no-repeat; background-position: center; background-size: cover;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='xMidYMid slice'%3E%3Cg stroke='rgba(147,197,253,0.13)' stroke-width='1' fill='none'%3E%3Cpath d='M0 140 L340 140 L410 210 L820 210'/%3E%3Cpath d='M1440 100 L1060 100 L990 170 L600 170'/%3E%3Cpath d='M150 900 L150 560 L240 460 L240 240'/%3E%3Cpath d='M1290 900 L1290 500 L1200 400 L1200 160'/%3E%3Cpath d='M0 680 L300 680 L380 600 L760 600'/%3E%3C/g%3E%3Cg fill='%2393c5fd'%3E%3Ccircle cx='340' cy='140' r='3'/%3E%3Ccircle cx='820' cy='210' r='3'/%3E%3Ccircle cx='1060' cy='100' r='3'/%3E%3Ccircle cx='240' cy='460' r='2.5'/%3E%3Ccircle cx='760' cy='600' r='2.5'/%3E%3C/g%3E%3Cg fill='%23f59e0b'%3E%3Ccircle cx='410' cy='210' r='3.5'/%3E%3Ccircle cx='1200' cy='400' r='3.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+/* Everything sits above the fixed decal */
+body > header, body > main, body > footer { position: relative; z-index: 1; }
+/* Cream sections are opaque so they hide the decal beneath them */
+.section-light, .section-light-alt { position: relative; z-index: 1; }
+
+/* ============================================================
    TWO-TONE SECTIONS
    Wrap a section in .section-light / .section-light-alt to flip
    it to the light palette. Dark stays the default everywhere else.
@@ -338,18 +365,6 @@ code:not(pre code) {
   -webkit-mask-image: radial-gradient(900px 520px at 78% 22%, black, transparent 80%);
   mask-image: radial-gradient(900px 520px at 78% 22%, black, transparent 80%);
   pointer-events: none;
-}
-/* circuit-connector print: diagonal lines routing to blue/gold nodes */
-.grid-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.9;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 720' preserveAspectRatio='xMidYMid slice'%3E%3Cg stroke='rgba(147,197,253,0.15)' stroke-width='1' fill='none'%3E%3Cpath d='M0 140 L340 140 L410 210 L820 210'/%3E%3Cpath d='M1440 100 L1060 100 L990 170 L600 170'/%3E%3Cpath d='M150 720 L150 480 L240 380 L240 180'/%3E%3Cpath d='M1290 720 L1290 420 L1200 320 L1200 120'/%3E%3C/g%3E%3Cg fill='%2393c5fd'%3E%3Ccircle cx='340' cy='140' r='3'/%3E%3Ccircle cx='820' cy='210' r='3'/%3E%3Ccircle cx='1060' cy='100' r='3'/%3E%3Ccircle cx='240' cy='380' r='2.5'/%3E%3C/g%3E%3Cg fill='%23f59e0b'%3E%3Ccircle cx='410' cy='210' r='3.5'/%3E%3Ccircle cx='1200' cy='320' r='3.5'/%3E%3C/g%3E%3C/svg%3E");
 }
 .grid-bg > * { position: relative; z-index: 1; }
 
