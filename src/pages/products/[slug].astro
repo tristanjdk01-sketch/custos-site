@@ -55,12 +55,12 @@ const isAdjudicator = p.slug === 'adjudicator';
         <div class="spec-grid">
           <!-- LEFT: built on + capabilities -->
           <div class="spec-left">
-            <span class="status-badge" style="margin-bottom: 1.5rem;">In development</span>
+            <span class="status-badge" style="margin-bottom: 1rem;">In development</span>
             <p class="spec-h">Built on</p>
             <div class="spec-stack">
               {p.spec.builtOn.map((t) => <span class="spec-chip">{t}</span>)}
             </div>
-            <p class="spec-h" style="margin-top: 1.75rem;">Capabilities</p>
+            <p class="spec-h" style="margin-top: 1.25rem;">Capabilities</p>
             <ul class="spec-caps">
               {p.spec.capabilities.map((c) => (
                 <li><span class="spec-arrow">&rarr;</span>{c}</li>
@@ -429,34 +429,34 @@ const isAdjudicator = p.slug === 'adjudicator';
     box-shadow: 0 30px 70px -40px rgba(0,0,0,0.85);
     overflow: hidden;
   }
-  .spec-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; }
-  .spec-left { padding: 2rem 2rem; border-right: 1px solid var(--border); }
-  .spec-right { padding: 2rem 2rem; }
+  .spec-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: start; }
+  .spec-left { padding: 1.4rem 1.5rem; border-right: 1px solid var(--border); }
+  .spec-right { padding: 1.4rem 1.5rem; }
   .spec-h {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle);
-    margin: 0 0 0.9rem;
+    margin: 0 0 0.65rem;
   }
-  .spec-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .spec-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .spec-chip {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
     color: var(--text); background: var(--bg); border: 1px solid var(--border);
-    border-radius: 7px; padding: 0.4rem 0.7rem;
+    border-radius: 6px; padding: 0.28rem 0.5rem;
   }
-  .spec-caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 1rem; }
-  .spec-caps li { font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: baseline; }
+  .spec-caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 0.85rem; }
+  .spec-caps li { font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 0.4rem; align-items: baseline; line-height: 1.3; }
   .spec-arrow { color: var(--brass); font-family: 'JetBrains Mono', monospace; }
 
-  .spec-right-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .spec-right-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
   .spec-online { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-bright); display: inline-flex; align-items: center; gap: 0.4rem; }
   .spec-dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; }
   .spec-query {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent-bright);
-    background: var(--bg); border: 1px solid var(--border); border-radius: 9px;
-    padding: 0.85rem 1rem; margin-bottom: 1rem; overflow-x: auto; white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent-bright);
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.7rem 0.85rem; margin-bottom: 0.7rem; overflow-x: auto; white-space: nowrap;
   }
-  .spec-results { display: flex; flex-direction: column; gap: 0.6rem; }
-  .spec-result { border: 1px solid var(--border); border-radius: 9px; background: var(--bg); padding: 0.8rem 0.9rem; }
+  .spec-results { display: flex; flex-direction: column; gap: 0.45rem; }
+  .spec-result { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); padding: 0.65rem 0.8rem; }
   .spec-result.k-a { border-left: 2px solid #34d399; }
   .spec-result.k-b { border-left: 2px solid var(--accent); }
   .spec-result.k-c { border-left: 2px solid var(--brass); }
@@ -466,11 +466,11 @@ const isAdjudicator = p.slug === 'adjudicator';
   .k-b .spec-tag { color: var(--accent-bright); background: var(--accent-dim); }
   .k-c .spec-tag { color: var(--brass); background: var(--brass-dim); }
   .spec-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-subtle); }
-  .spec-result-body { margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .spec-result-body { margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
   .spec-foot {
     display: flex; justify-content: space-between; align-items: center;
-    margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--border);
-    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.05em;
+    margin-top: 0.85rem; padding-top: 0.8rem; border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.05em;
     text-transform: uppercase; color: var(--text-subtle);
   }
 
