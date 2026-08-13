@@ -50,7 +50,7 @@ const isAdjudicator = p.slug === 'adjudicator';
 
   {p.spec && (
     <!-- Product spec panel: Built On + Capabilities + live query -->
-    <section class="wrap-narrow" style="padding: 3rem 1.5rem 0;">
+    <section class="wrap" style="padding: 3rem 1.5rem 0;">
       <div class="spec">
         <div class="spec-grid">
           <!-- LEFT: built on + capabilities -->
@@ -429,9 +429,9 @@ const isAdjudicator = p.slug === 'adjudicator';
     box-shadow: 0 30px 70px -40px rgba(0,0,0,0.85);
     overflow: hidden;
   }
-  .spec-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: start; }
-  .spec-left { padding: 1.4rem 1.5rem; border-right: 1px solid var(--border); }
-  .spec-right { padding: 1.4rem 1.5rem; }
+  .spec-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; align-items: stretch; }
+  .spec-left { padding: 1.6rem 1.75rem; border-right: 1px solid var(--border); }
+  .spec-right { padding: 1.6rem 1.75rem; }
   .spec-h {
     font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle);
