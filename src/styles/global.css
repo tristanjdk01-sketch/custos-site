@@ -332,14 +332,26 @@ code:not(pre code) {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(800px 480px at 30% 20%, black, transparent 80%);
-  mask-image: radial-gradient(800px 480px at 30% 20%, black, transparent 80%);
+    linear-gradient(rgba(147,197,253,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147,197,253,0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(900px 520px at 78% 22%, black, transparent 80%);
+  mask-image: radial-gradient(900px 520px at 78% 22%, black, transparent 80%);
   pointer-events: none;
 }
-.grid-bg > * { position: relative; }
+/* circuit-connector print: diagonal lines routing to blue/gold nodes */
+.grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 720' preserveAspectRatio='xMidYMid slice'%3E%3Cg stroke='rgba(147,197,253,0.15)' stroke-width='1' fill='none'%3E%3Cpath d='M0 140 L340 140 L410 210 L820 210'/%3E%3Cpath d='M1440 100 L1060 100 L990 170 L600 170'/%3E%3Cpath d='M150 720 L150 480 L240 380 L240 180'/%3E%3Cpath d='M1290 720 L1290 420 L1200 320 L1200 120'/%3E%3C/g%3E%3Cg fill='%2393c5fd'%3E%3Ccircle cx='340' cy='140' r='3'/%3E%3Ccircle cx='820' cy='210' r='3'/%3E%3Ccircle cx='1060' cy='100' r='3'/%3E%3Ccircle cx='240' cy='380' r='2.5'/%3E%3C/g%3E%3Cg fill='%23f59e0b'%3E%3Ccircle cx='410' cy='210' r='3.5'/%3E%3Ccircle cx='1200' cy='320' r='3.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+.grid-bg > * { position: relative; z-index: 1; }
 
 /* Data-flow / boundary diagram primitives */
 .flow-node {

@@ -1,0 +1,47 @@
+---
+// Reusable "blueprint print" decal for navy sections: faint grid + diagonal
+// connector lines routing to blue/gold nodes. Pure SVG/CSS, no images.
+// Drop inside a position:relative section; it sits behind content.
+interface Props {
+  /** opacity of the whole decal (0-1). Default 1. */
+  opacity?: number;
+  /** flip the connector routing horizontally for variety between sections */
+  flip?: boolean;
+}
+const { opacity = 1, flip = false } = Astro.props;
+---
+<div class:list={["circuit-decal", { flip }]} style={`opacity:${opacity}`} aria-hidden="true">
+  <div class="cd-grid"></div>
+  <svg class="cd-svg" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice">
+    <g stroke="rgba(147,197,253,0.15)" stroke-width="1" fill="none">
+      <path d="M0 140 L340 140 L410 210 L820 210" />
+      <path d="M1440 100 L1060 100 L990 170 L600 170" />
+      <path d="M150 720 L150 480 L240 380 L240 180" />
+      <path d="M1290 720 L1290 420 L1200 320 L1200 120" />
+      <path d="M0 560 L280 560 L360 480 L720 480" />
+    </g>
+    <g fill="#93c5fd">
+      <circle cx="340" cy="140" r="3" /><circle cx="820" cy="210" r="3" />
+      <circle cx="1060" cy="100" r="3" /><circle cx="240" cy="380" r="2.5" />
+      <circle cx="720" cy="480" r="2.5" />
+    </g>
+    <g fill="#f59e0b">
+      <circle cx="410" cy="210" r="3.5" /><circle cx="1200" cy="320" r="3.5" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  .circuit-decal { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .circuit-decal.flip { transform: scaleX(-1); }
+  .cd-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(147,197,253,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147,197,253,0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(140% 130% at 78% 22%, #000 35%, transparent 82%);
+    mask-image: radial-gradient(140% 130% at 78% 22%, #000 35%, transparent 82%);
+  }
+  .cd-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+</style>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CircuitDecal from '../components/CircuitDecal.astro';
 
 const verticals = [
   {
@@ -133,7 +134,9 @@ const steps = [
   </section>
 
   <!-- STATS / PROOF ROW (navy band) -->
-  <section class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+  <section class="stats-section reveal" style="position: relative; overflow: hidden;">
+    <CircuitDecal opacity={0.85} />
+    <div class="wrap" style="position: relative; z-index: 2; padding: 4.5rem 1.5rem;">
     <div class="rule">
       <span class="sec-num">[ WHY ]</span>
       <span class="label">The shape of the problem</span>
@@ -155,6 +158,7 @@ const steps = [
         <span class="stat-num">2025</span>
         <span class="stat-label">Cassava AI Factory brought sovereign GPU compute to SA at scale. The excuse is gone.</span>
       </div>
+    </div>
     </div>
   </section>
 
@@ -194,6 +198,7 @@ const steps = [
   <!-- CTA (signature: animated guardian aperture returns here) -->
   <section class="wrap reveal" style="padding: 4.5rem 1.5rem 0;">
     <div class="cta-panel">
+      <CircuitDecal opacity={0.6} flip />
       <canvas id="aperture" width="1200" height="1200" aria-hidden="true"></canvas>
       <div class="cta-inner">
         <p class="label label-accent" style="margin: 0 0 1rem;">For CIOs, CROs, and Heads of Data</p>
