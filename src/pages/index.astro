@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SovereigntyMap from '../components/SovereigntyMap.astro';
+import { products } from '../data/products';
 
 const verticals = [
   {
@@ -217,6 +218,46 @@ const steps = [
     </div>
   </section>
 
+  <!-- PRODUCTS SHOWCASE (cream band) -->
+  <section class="section-light">
+    <div class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+      <div class="rule">
+        <span class="sec-num">[ PRODUCTS ]</span>
+        <h2 class="label" style="margin: 0;">Sovereign AI, built for SA regulation</h2>
+      </div>
+      <p style="margin: 0 0 2.25rem; font-size: 0.98rem; color: var(--text-muted); line-height: 1.65; max-width: 58ch;">
+        POPIA-native products in development, one per regulated industry, plus the control plane that sits over them all. Design partners wanted.
+      </p>
+      <div class="prod-showcase">
+        {products.map((p) => (
+          <a href={`/products/${p.slug}`} class="prod-tile">
+            <div class="prod-thumb">
+              {p.heroImage ? (
+                <picture>
+                  <source srcset={`/${p.heroImage}.webp`} type="image/webp" />
+                  <img src={`/${p.heroImage}.jpg`} alt="" loading="lazy" decoding="async" />
+                </picture>
+              ) : (
+                <div class="prod-thumb-code" aria-hidden="true">
+                  <span class="ptc-ring"></span><span class="ptc-ring r2"></span><span class="ptc-core"></span>
+                </div>
+              )}
+              <span class="prod-badge">In development</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-head">
+                <h3 class="prod-name">{p.name}</h3>
+                <span class="prod-industry">{p.industry}</span>
+              </div>
+              <p class="prod-tag">{p.tagline}</p>
+              <span class="prod-link">View product &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- CTA (signature: animated guardian aperture returns here) -->
   <section class="wrap reveal" style="padding: 4.5rem 1.5rem 0;">
     <div class="cta-panel">
@@ -335,6 +376,41 @@ const steps = [
       opacity: 0.35;
     }
   }
+
+  /* Products showcase (cream band) */
+  .prod-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .prod-tile {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--l-line); border-radius: 12px; overflow: hidden;
+    background: var(--l-surface);
+    box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 12px 30px -20px rgba(16,24,40,0.18);
+    transition: transform 0.2s cubic-bezier(.2,.7,.2,1), box-shadow 0.3s, border-color 0.2s;
+  }
+  .prod-tile:hover { transform: translateY(-4px); border-color: rgba(37,99,235,0.35); box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 24px 46px -22px rgba(37,99,235,0.28); }
+  .prod-thumb { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--bg); }
+  .prod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .prod-thumb-code {
+    width: 100%; height: 100%; position: relative;
+    background: radial-gradient(120% 120% at 70% 30%, rgba(59,130,246,0.18), transparent 60%), #0e1b3a;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ptc-ring { position: absolute; width: 90px; height: 90px; border: 1.5px solid rgba(59,130,246,0.4); border-radius: 50%; }
+  .ptc-ring.r2 { width: 140px; height: 140px; border-color: rgba(59,130,246,0.2); }
+  .ptc-core { width: 20px; height: 20px; border-radius: 50%; background: var(--brass); box-shadow: 0 0 16px var(--brass); }
+  .prod-badge {
+    position: absolute; top: 0.6rem; left: 0.6rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.03em;
+    color: var(--brass); background: rgba(8,11,18,0.72); backdrop-filter: blur(4px);
+    border: 1px solid var(--brass-border); border-radius: 999px; padding: 0.2rem 0.55rem;
+  }
+  .prod-body { padding: 1.1rem 1.25rem 1.35rem; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+  .prod-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+  .prod-name { font-family: var(--heading); font-weight: 600; font-size: 1.15rem; color: var(--l-ink); margin: 0; letter-spacing: -0.01em; }
+  .prod-industry { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--l-amber-ink); white-space: nowrap; }
+  .prod-tag { margin: 0; font-size: 0.82rem; color: var(--l-ink-muted); line-height: 1.5; flex: 1; }
+  .prod-link { margin-top: 0.4rem; font-size: 0.8rem; font-weight: 600; color: var(--l-blue); }
+  @media (max-width: 920px) { .prod-showcase { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .prod-showcase { grid-template-columns: 1fr; } }
 
   /* Sovereignty map section — contained panel so it reads as one deliberate visual, not a blob */
   .sov-panel {
