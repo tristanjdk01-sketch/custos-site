@@ -133,23 +133,25 @@ const steps = [
     </div>
   </section>
 
-  <!-- SIGNATURE: SOVEREIGNTY MAP (navy band) -->
-  <section class="wrap reveal" style="padding: 5rem 1.5rem;">
-    <div class="sov-grid">
-      <div class="sov-copy">
-        <span class="sec-num">[ SOVEREIGNTY ]</span>
-        <h2 class="h-section" style="margin: 0.75rem 0 0; max-width: 16ch;">Your data has a jurisdiction. We keep it inside the line.</h2>
-        <p style="margin: 1.5rem 0 0; font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; max-width: 44ch;">
-          Every model call is a decision about who can reach your data, and under whose law. We design the architecture so the answer is always: South Africa.
-        </p>
-        <div class="sov-legend">
-          <span><span class="dot blue"></span>Data node, in jurisdiction</span>
-          <span><span class="dot gold"></span>Sovereign core</span>
-          <span><span class="dot border"></span>Cross-border attempt, blocked</span>
+  <!-- SIGNATURE: SOVEREIGNTY MAP (navy band, contained panel) -->
+  <section class="wrap reveal" style="padding: 4.5rem 1.5rem;">
+    <div class="sov-panel">
+      <div class="sov-grid">
+        <div class="sov-copy">
+          <span class="sec-num">[ SOVEREIGNTY ]</span>
+          <h2 class="h-section" style="margin: 0.75rem 0 0; max-width: 16ch;">Your data has a jurisdiction. We keep it inside the line.</h2>
+          <p style="margin: 1.5rem 0 0; font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; max-width: 44ch;">
+            Every model call is a decision about who can reach your data, and under whose law. We design the architecture so the answer is always: South Africa.
+          </p>
+          <div class="sov-legend">
+            <span><span class="dot blue"></span>Data node, in jurisdiction</span>
+            <span><span class="dot gold"></span>Sovereign core</span>
+            <span><span class="dot border"></span>Cross-border attempt, blocked</span>
+          </div>
         </div>
-      </div>
-      <div class="sov-visual">
-        <SovereigntyMap />
+        <div class="sov-visual">
+          <SovereigntyMap />
+        </div>
       </div>
     </div>
   </section>
@@ -334,8 +336,16 @@ const steps = [
     }
   }
 
-  /* Sovereignty map section */
-  .sov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+  /* Sovereignty map section — contained panel so it reads as one deliberate visual, not a blob */
+  .sov-panel {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-surface);
+    box-shadow: 0 30px 70px -40px rgba(0,0,0,0.85);
+    padding: 2.75rem 3rem;
+    overflow: hidden;
+  }
+  .sov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
   .sov-legend { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.75rem; }
   .sov-legend span { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--text-muted); }
   .sov-legend .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
